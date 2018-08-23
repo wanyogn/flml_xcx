@@ -1,0 +1,83 @@
+<import src="../header/header.wxml" />
+<view class="content-container">
+  <view class="pick-header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+    <view class='header_img' bindtap='onPickHeaderClick'>
+      <image src='../image/shai.png' wx:if="{{isSearch == false}}" class='header_img_main'></image>
+       <image wx:else src="../image/cuo.png" class='header_img_main'></image>
+    </view>
+  </view>
+
+  <view class="pick-container {{needAnimation ? (openPicker ? 'slidown' : 'slidup') : ''}}" >
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">生产资质</text>
+        <block wx:for="{{scxk}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickSC" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">经营资质</text>
+        <block wx:for="{{jyxk}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickJY" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">服务资质</text>
+        <block wx:for="{{xxfw}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickXX" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs' style='margin-top:50rpx;'>
+        <text class='sure' bindtap='screenSearch'>确定</text>
+        <text class='cancel' bindtap='closeMe'>取消</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="shadow" style="height:{{contentHeight}}px;line-height:{{contentHeight}}px" hidden="{{!openPicker}}"></view>
+
+  <view class="content">
+    <view class='main'>
+      <text class='main_tip'>搜索“<text class='keyword'>{{keyword}}</text>”，共计<text class='num'>{{matchCount}}</text>条</text>  
+      <block wx:for="{{searchDatas}}" wx:for-item="item">
+          <view class='item'>
+            <view class='item_main'>
+              <view class='item_main_right'>
+                <text class='title' bindtap='bindSearchTap' data-text="{{item.company_name}}">{{item.company_name}}</text>
+                <view class='sczz'>
+                 <text>生产资质</text>
+                 <block wx:for="{{item.production_type}}" wx:for-item="idx">
+                   <text class='sczz_t {{idx.cls}}'>{{idx.title}}</text>
+                 </block>
+                 <text style='margin-left:30rpx;'>相关产品</text>
+                 <text class='sczz_t active'>{{item.product_count}}</text>
+                </view>
+                <view class='sczz'>
+                 <text>经营资质</text>
+                  <block wx:for="{{item.manager_type}}" wx:for-item="idx">
+                   <text class='sczz_t {{idx.cls}}'>{{idx.title}}</text>
+                 </block>
+                 <text style='margin-left:30rpx;'>中标公告</text>
+                 <text class='sczz_t active'>{{item.tenderbid_count}}</text>
+                </view>
+                <view class='sczz'>
+                 <text>服务资质</text>
+                 <block wx:for="{{item.web_type}}" wx:for-item="idx">
+                   <text class='sczz_t {{idx.cls}}'>{{idx.title}}</text>
+                 </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+    </view>
+    
+  </view>
+</view>

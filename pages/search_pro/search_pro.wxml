@@ -1,0 +1,71 @@
+<import src="../header/header.wxml" />
+<view class="content-container">
+  <view class="pick-header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+    <view class='header_img' bindtap='onPickHeaderClick'>
+      <image src='../image/shai.png' wx:if="{{isSearch == false}}" class='header_img_main'></image>
+       <image wx:else src="../image/cuo.png" class='header_img_main'></image>
+    </view>
+  </view>
+
+  <view class="pick-container {{needAnimation ? (openPicker ? 'slidown' : 'slidup') : ''}}" >
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">产品归属</text>
+        <block wx:for="{{cpgs}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickCP" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">注册状态</text>
+        <block wx:for="{{zczt}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickZC" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">管理类别</text>
+        <block wx:for="{{gllb}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickGL" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs' style='margin-top:50rpx;'>
+        <text class='sure' bindtap='screenSearch'>确定</text>
+        <text class='cancel' bindtap='closeMe'>取消</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="shadow" style="height:{{contentHeight}}px;line-height:{{contentHeight}}px" hidden="{{!openPicker}}"></view>
+
+  <view class="content">
+    <view class='main'>
+      <text class='main_tip'>搜索“<text class='keyword'>{{keyword}}</text>”，共计<text class='num'>{{matchCount}}</text>条</text>  
+        <block wx:for="{{searchDatas}}" wx:for-item="item">
+          <view class='item'>
+            <view class='item_main'>
+              <view class='item_main_left'>
+                <image class='item_main_left_img' src='{{item.picture_addr}}'/>
+              </view>
+              <view class='item_main_right'>
+                <view class='title_content'>
+                  <text class='title' bindtap='bindSearchTap' data-id="{{item.id}}">{{item.product_name_ch}}</text>
+                  <text class='{{item.product_state == "有效"?"y_status":"w_status"}}'>{{item.product_state}}</text>
+                </view>
+                <text class='zcgs' data-key='{{item.maker_name}}' bindtap='bindCompany'>注册公司：<text class='zcgs_content'>{{item.maker_name_ch}}</text></text>
+                <text class='cdgs'>产地归属：{{item.src_loc}}</text>
+                <text class='gllb'>管理类别：{{item.main_class}}</text>
+                <text class='flml'>型号规格：{{item.product_mode}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+    </view>
+    
+  </view>
+</view>

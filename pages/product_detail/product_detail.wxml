@@ -1,0 +1,439 @@
+<import src="../header/header.wxml" />
+<view class='content-container'>
+  <view class="header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+  </view>
+  <view class='main'>
+    <view class='main_1'>
+      <view class='main_title'>
+        <text>{{searchData.product_name_ch}}</text>
+      </view>
+      <view class='main_content'>
+        
+        <view class='main_content_body'>
+          <view class='main_img' wx:if="{{picExist == 1}}">
+            <view class='main_img_con'>
+              <image src='{{searchData.picture_addr}}'></image>
+            </view>
+            
+          </view>
+          <!--start  一类备案-->
+          <view wx:if="{{searchData.main_class == 1}}">
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备案号</text>
+              <text class='content_value'>{{searchData.register_code}}</text>
+            </view>
+            <view wx:if="{{searchData.src_loc == 0}}">
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>备案人名称</text>
+                <text class='content_value companyName' data-key='{{searchData.maker_name}}' bindtap='bindCompany'>{{searchData.maker_name_ch}}</text>
+              </view>
+            </view>
+            <view wx:else>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>备案人名称</text>
+                <text class='content_value'>{{searchData.maker_name_ch}}</text>
+              </view>
+            </view>
+            
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备案人住所</text>
+              <text class='content_value'>{{searchData.maker_addr_ch}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>生产地址</text>
+              <text class='content_value'>{{searchData.production_site_ch}}</text>
+            </view>
+            <view wx:if="{{searchData.src_loc == 0}}">
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人名称</text>
+                <text class='content_value'>{{searchData.agent}}</text>
+              </view>
+            </view>
+            <view wx:else>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人名称</text>
+                <text class='content_value companyName' data-key='{{searchData.agent}}' bindtap='bindCompany'>{{searchData.agent}}</text>
+              </view>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>代理人住所</text>
+              <text class='content_value'>{{searchData.agent_addr}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>产品名称</text>
+              <text class='content_value'>{{searchData.product_name_ch}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>产品类别</text>
+              <text class='content_value'>{{searchData.architectural_feature}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>型号与规格</text>
+              <text class='content_value'>{{searchData.product_mode}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>结构及组成</text>
+              <text class='content_value'>{{searchData.main_component}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>预期用途</text>
+              <text class='content_value'>{{searchData.purpose}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>储存及有效期</text>
+              <text class='content_value'>{{searchData.storage_condition}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备注</text>
+              <text class='content_value'>{{searchData.remarks}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备案日期</text>
+              <text class='content_value'>{{searchData.approval_date}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备案状态</text>
+              <text class='content_value'>{{searchData.current_state}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>变更情况</text>
+              <text class='content_value'>{{searchData.change_content}}</text>
+            </view>
+            <view class='main_1_content_body_row'>
+              <text class='content_title'>备案单位</text>
+              <text class='content_value'>{{searchData.approval_dept}}</text>
+            </view>
+          </view>
+          <view wx:else>
+            <!--国产详情-->
+            <view wx:if="{{searchData.src_loc == 0}}">
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册证编号</text>
+                <text class='content_value'>{{searchData.register_code}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人名称</text>
+                <text class='content_value companyName' data-key='{{searchData.maker_name}}' bindtap='bindCompany'>{{searchData.maker_name_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人住所</text>
+                <text class='content_value'>{{searchData.maker_addr_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产地址</text>
+                <text class='content_value'>{{searchData.production_site_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人名称</text>
+                <text class='content_value'>{{searchData.agent}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人住所</text>
+                <text class='content_value'>{{searchData.agent_addr}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品名称</text>
+                <text class='content_value'>{{searchData.product_name_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>型号与规格</text>
+                <text class='content_value'>{{searchData.product_mode}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>结构及组成</text>
+                <text class='content_value'>{{searchData.product_struct}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>适用范围</text>
+                <text class='content_value'>{{searchData.product_scope}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>主要组成成分</text>
+                <text class='content_value'>{{searchData.main_component}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>预期用途</text>
+                <text class='content_value'>{{searchData.purpose}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>储存及有效期</text>
+                <text class='content_value'>{{searchData.storage_condition}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品标准</text>
+                <text class='content_value'>{{searchData.product_standard}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>其他内容</text>
+                <text class='content_value'>{{searchData.others}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>附件</text>
+                <text class='content_value'>{{searchData.attachment}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>备注</text>
+                <text class='content_value'>{{searchData.remarks}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>批准日期</text>
+                <text class='content_value'>{{searchData.approval_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>有效期至</text>
+                <text class='content_value'>{{searchData.expiry_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更日期</text>
+                <text class='content_value'>{{searchData.change_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更情况</text>
+                <text class='content_value'>{{searchData.change_content}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>审批部门</text>
+                <text class='content_value'>{{searchData.approval_dept}}</text>
+              </view>
+            </view>
+            <!--进口-->
+            <view wx:elif="{{searchData.src_loc == 1}}">
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册证编号</text>
+                <text class='content_value'>{{searchData.register_code}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人名称</text>
+                <text class='content_value'>{{searchData.maker_name_en}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产人中文名</text>
+                <text class='content_value'>{{searchData.maker_area_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产国 [中]</text>
+                <text class='content_value'>{{searchData.maker_area_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产国 [英]</text>
+                <text class='content_value'>{{searchData.maker_area_en}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人住所</text>
+                <text class='content_value'>{{searchData.maker_addr_en}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产地址</text>
+                <text class='content_value'>{{searchData.production_site_en}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人名称</text>
+                <text class='content_value companyName' data-key='{{searchData.agent}}' bindtap='bindCompany'>{{searchData.agent}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人住所</text>
+                <text class='content_value'>{{searchData.agent_addr}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>售后服务机构</text>
+                <text class='content_value'>{{searchData.service_agency}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品名称</text>
+                <text class='content_value'>{{searchData.product_name_en}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品中文名称</text>
+                <text class='content_value'>{{searchData.product_name_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>型号与规格</text>
+                <text class='content_value'>{{searchData.product_mode}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>结构及组成</text>
+                <text class='content_value'>{{searchData.product_struct}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>适用范围</text>
+                <text class='content_value'>{{searchData.product_scope}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>主要组成成分</text>
+                <text class='content_value'>{{searchData.main_component}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>预期用途</text>
+                <text class='content_value'>{{searchData.purpose}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>储存及有效期</text>
+                <text class='content_value'>{{searchData.storage_condition}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品标准</text>
+                <text class='content_value'>{{searchData.product_standard}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>其他内容</text>
+                <text class='content_value'>{{searchData.others}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>附件</text>
+                <text class='content_value'>{{searchData.attachment}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>备注</text>
+                <text class='content_value'>{{searchData.remarks}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>批准日期</text>
+                <text class='content_value'>{{searchData.approval_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>有效期至</text>
+                <text class='content_value'>{{searchData.expiry_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更日期</text>
+                <text class='content_value'>{{searchData.change_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更情况</text>
+                <text class='content_value'>{{searchData.change_content}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>审批部门</text>
+                <text class='content_value'>{{searchData.approval_dept}}</text>
+              </view>
+            </view>
+            <view wx:else>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册证编号</text>
+                <text class='content_value'>{{searchData.register_code}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人名称</text>
+                <text class='content_value companyName' data-key='{{searchData.maker_name}}' bindtap='bindCompany'>{{searchData.maker_name_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>注册人住所</text>
+                <text class='content_value'>{{searchData.maker_addr_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>生产地址</text>
+                <text class='content_value'>{{searchData.production_site_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人名称</text>
+                <text class='content_value'>{{searchData.agent}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>代理人住所</text>
+                <text class='content_value'>{{searchData.agent_addr}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品名称</text>
+                <text class='content_value'>{{searchData.product_name_ch}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>型号与规格</text>
+                <text class='content_value'>{{searchData.product_mode}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>结构及组成</text>
+                <text class='content_value'>{{searchData.product_struct}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>适用范围</text>
+                <text class='content_value'>{{searchData.product_scope}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>主要组成成分</text>
+                <text class='content_value'>{{searchData.main_component}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>预期用途</text>
+                <text class='content_value'>{{searchData.purpose}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>储存及有效期</text>
+                <text class='content_value'>{{searchData.storage_condition}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>产品标准</text>
+                <text class='content_value'>{{searchData.product_standard}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>其他内容</text>
+                <text class='content_value'>{{searchData.others}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>附件</text>
+                <text class='content_value'>{{searchData.attachment}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>备注</text>
+                <text class='content_value'>{{searchData.remarks}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>批准日期</text>
+                <text class='content_value'>{{searchData.approval_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>有效期至</text>
+                <text class='content_value'>{{searchData.expiry_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更日期</text>
+                <text class='content_value'>{{searchData.change_date}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>变更情况</text>
+                <text class='content_value'>{{searchData.change_content}}</text>
+              </view>
+              <view class='main_1_content_body_row'>
+                <text class='content_title'>审批部门</text>
+                <text class='content_value'>{{searchData.approval_dept}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='main_2'>
+      <view class='main_title' style='background-color: #c9caca;'>
+        <text>同名产品</text>
+      </view>
+      <view class='main_content' style='margin-top:0;'>
+        <view class='main_content_body'>
+          <block wx:for="{{sameProducts}}" wx:for-item="item">
+            <view class='main_2_content_body_row'>
+                <text>{{item.register_code}}</text>
+                <text>{{item.maker_name_ch}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='main_3'>
+      <view class='main_title' style='background-color: #c9caca;'>
+        <text>同名中标公告</text>
+      </view>
+      <view class='main_content' style='margin-top:0;'>
+        <view class='main_content_body'>
+          <block wx:for="{{productTenderbids}}" wx:for-item="item">
+            <view class='main_3_content_body_row'>
+                <text>{{item.title}}</text>
+                <text>发布时间：{{item.date}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='bottom'>
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,79 @@
+<import src="../header/header.wxml" />
+<view class="content-container">
+  <view class="pick-header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+    <view class='header_img' bindtap='onPickHeaderClick'>
+      <image src='../image/shai.png' wx:if="{{isSearch == false}}" class='header_img_main'></image>
+       <image wx:else src="../image/cuo.png" class='header_img_main'></image>
+    </view>
+  </view>
+
+  <view class="pick-container {{needAnimation ? (openPicker ? 'slidown' : 'slidup') : ''}}" >
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">医院评级</text>
+        <block wx:for="{{yypj}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickPJ" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">医院评等</text>
+        <block wx:for="{{yypd}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickPD" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs'>
+        <text class="tit">经济类型</text>
+        <block wx:for="{{jjlx}}" wx:for-item="item">
+          <text class="tj {{item.selected==true?'active':''}}" bindtap="menuClickJJ" id="{{item.id}}">{{item.title}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='pick_main'>
+      <view class='pick_gs' style='margin-top:50rpx;'>
+        <text class='sure' bindtap='screenSearch'>确定</text>
+        <text class='cancel' bindtap='closeMe'>取消</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="shadow" style="height:{{contentHeight}}px;line-height:{{contentHeight}}px" hidden="{{!openPicker}}"></view>
+
+  <view class="content">
+    <view class='main'>
+      <text class='main_tip'>搜索“<text class='keyword'>{{keyword}}</text>”，共计<text class='num'>{{matchCount}}</text>条</text>  
+      <block wx:for="{{searchDatas}}" wx:for-item="item">
+          <view class='item'>
+            <view class='item_main'>
+              <view class='item_main_right'>
+                <text class='title' bindtap='bindSearchTap' id="{{item.id}}">{{item.hospital_name}}</text>
+                <view class='sczz'>
+                  <text>医院分级</text>
+                  <text>{{item.level}}</text>
+                  <text>医院定等</text>
+                  <text>{{item.grade}}</text>
+                </view>
+                <view class='sczz'>
+                 <text>经济类型</text>
+                 <text class='sczz_o'>{{item.type_nature}}</text>
+                </view>
+                <view class='sczz'>
+                 <text>地址</text>
+                 <text class='sczz_o'>{{item.hospital_address}}</text>
+                </view>
+                <view class='sczz'>
+                 <text>电话</text>
+                 <text class='sczz_o'>{{item.hospital_phone}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+    </view>
+    
+  </view>
+</view>

@@ -1,0 +1,11 @@
+
+<view class='container_view'> 
+  <view class="search_view">  
+    <view class="search_input_view">  
+      <icon class="search_icon" size='24' type='search'></icon>  
+      <input class="search_input" placeholder="请输入关键字" bindinput='inputChange' value=""/>  
+    </view>  
+  </view>  
+  <view class='search_button' bindtap='search'>搜索</view>  
+</view>
+

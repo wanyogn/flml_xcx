@@ -1,0 +1,29 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/login/login",
+    "pages/product_detail/product_detail",
+    "pages/search_pro/search_pro",
+    "pages/search_com/search_com",
+    "pages/company_detail/company_detail",
+    "pages/product_list/product_list",
+    "pages/tenderbid_list/tenderbid_list",
+    "pages/search_hos/search_hos",
+    "pages/hospital_detail/hospital_detail",
+    "pages/ml_first/first",
+    "pages/ml_search/search",
+    "pages/ml_searchResult/searchResult",
+    "pages/ml_second/second"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "医械查",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

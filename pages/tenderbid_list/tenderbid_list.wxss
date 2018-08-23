@@ -1,0 +1,33 @@
+/* pages/tenderbid_list/tenderbid_list.wxss */
+.main{
+  padding:20rpx 30rpx 30rpx 30rpx;
+  background-color:#f4f4f4;
+}
+.main_2{
+  padding:20rpx 30rpx 30rpx 30rpx;
+  background-color:#fff;
+  display:flex;
+  flex-direction:column;
+}
+.main_2_product{
+  width:100%;
+  height:auto;
+}
+.main_2_product{
+  width:100%;
+  height:auto;
+}.main_2_content_body_row{
+  width: 100%;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #dedddd;
+  display: flex;
+  flex-direction: column;
+}
+.main_2_content_body_row_title{
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.main_2_content_body_row_time{
+  font-size: 18rpx;
+  margin-top: 5rpx;
+}

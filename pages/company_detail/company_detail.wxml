@@ -1,0 +1,433 @@
+<!--pages/company_detail/company_detail.wxml-->
+<import src="../header/header.wxml" />
+<import src="../no_info/no_info.wxml" />
+<view class='content-container'>
+  <view class="header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+  </view>
+  <view class='main'>
+    <view class='main_1'>
+      <view class='main_1_left'>
+        <image src='../image/company.png'></image>
+      </view>
+      <view class='main_1_right'>
+        <view class='title'>{{companyName}}</view>
+        <text class='introduct'></text>
+      </view>
+    </view>
+    <view class='main_2'>
+        <text class='main_2_title'>医疗器械生产</text>
+        <view class='main_2_type'>
+          <block wx:for="{{qxsc}}">
+            <view class="sc {{item.cls}} {{item.selected==true?'active':''}}" bindtap='SCChange' data-sign='{{item.sign}}'>{{item.title}}</view>
+          </block>
+        </view>
+        <!--生产许可列表信息-->
+        <block wx:if="{{currentSC=='xk'}}">
+          <block wx:if="{{xukeSC==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>许可证编号</text>
+                <text class='content_value'>{{xukeSC.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证部门</text>
+                <text class='content_value'>{{xukeSC.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证日期</text>
+                <text class='content_value'>{{xukeSC.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>有效期限</text>
+                <text class='content_value'>{{xukeSC.expiry_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{xukeSC.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{xukeSC.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>住所</text>
+                <text class='content_value'>{{xukeSC.company_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{xukeSC.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>生产地址</text>
+                <text class='content_value'>{{xukeSC.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>生产范围</text>
+                <text class='content_value'>{{xukeSC.production_scope}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <!--生产备案列表信息-->
+        <block wx:else>
+          <block wx:if="{{beianSC==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案编号</text>
+                <text class='content_value'>{{beianSC.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案部门</text>
+                <text class='content_value'>{{beianSC.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案日期</text>
+                <text class='content_value'>{{beianSC.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{beianSC.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{beianSC.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>住所</text>
+                <text class='content_value'>{{beianSC.company_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{beianSC.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>生产地址</text>
+                <text class='content_value'>{{beianSC.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>生产范围</text>
+                <text class='content_value'>{{beianSC.production_scope}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <view class='main_2_product'>
+          <view class='main_2_product_title'>
+            <view class='main_2_product_title_view'>
+              相关产品
+            </view>
+            <view class='main_2_product_title_result'>
+              相关信息<text class='product_num'>{{matchCount}}</text>个
+            </view>
+            <block wx:if="{{matchCount>3}}">
+              <view class='main_2_product_title_result_more' data-keyword="{{companyName}}" bindtap='lookMore'>查看更多>></view>
+            </block>
+          </view>
+          <view>
+            <block wx:for="{{productData}}">
+              <view class='item'>
+                <view class='item_main'>
+                  <view class='item_main_left'>
+                    <image class='item_main_left_img' src='{{item.picture_addr}}'/>
+                  </view>
+                  <view class='item_main_right'>
+                    <view class='title_content'>
+                      <text class='title' bindtap='bindSearchTap' data-id="{{item.id}}">{{item.product_name_ch}}</text>
+                      <text class='{{item.product_state == "有效"?"y_status":"w_status"}}'>{{item.product_state}}</text>
+                    </view>
+                    <text class='zcgs'>注册公司：{{item.maker_name_ch}}</text>
+                    <text class='cdgs'>产地归属：{{item.src_loc}}</text>
+                    <text class='gllb'>管理类别：{{item.main_class}}</text>
+                    <text class='flml'>型号规格：{{item.product_mode}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+    </view>
+    <view class='main_2'>
+        <text class='main_2_title'>医疗器械经营</text>
+        <view class='main_2_type'>
+          <block wx:for="{{qxjy}}">
+            <view class="sc {{item.cls}} {{item.selected==true?'active':''}}" bindtap='JYChange' data-sign='{{item.sign}}'>{{item.title}}</view>
+          </block>
+        </view>
+        <!--经营许可信息列表-->
+        <block wx:if="{{currentJY=='xk'}}">
+          <block wx:if="{{xukeJY==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>许可证编号</text>
+                <text class='content_value'>{{xukeJY.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证部门</text>
+                <text class='content_value'>{{xukeJY.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证日期</text>
+                <text class='content_value'>{{xukeJY.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>有效期限</text>
+                <text class='content_value'>{{xukeJY.expiry_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{xukeJY.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{xukeJY.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营方式</text>
+                <text class='content_value'>{{xukeJY.manage_mode}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{xukeJY.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>住所</text>
+                <text class='content_value'>{{xukeJY.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营场所</text>
+                <text class='content_value'>{{xukeJY.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>库房地址</text>
+                <text class='content_value'>{{xukeJY.warehouse_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营范围</text>
+                <text class='content_value'>{{xukeJY.production_scope}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <!--经营备案信息列表-->
+        <block wx:else>
+          <block wx:if="{{beianJY==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案编号</text>
+                <text class='content_value'>{{beianJY.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案部门</text>
+                <text class='content_value'>{{beianJY.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>备案日期</text>
+                <text class='content_value'>{{beianJY.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{beianJY.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{beianJY.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营方式</text>
+                <text class='content_value'>{{beianJY.manage_mode}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{beianJY.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>住所</text>
+                <text class='content_value'>{{beianJY.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营场所</text>
+                <text class='content_value'>{{beianJY.production_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>库房地址</text>
+                <text class='content_value'>{{beianJY.warehouse_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>经营范围</text>
+                <text class='content_value'>{{beianJY.production_scope}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <view class='main_2_product'>
+          <view class='main_2_product_title'>
+            <view class='main_2_product_title_view'>
+              中标信息
+            </view>
+            <view class='main_2_product_title_result'>
+              相关信息<text class='product_num'>{{matchCountZB}}</text>个
+            </view>
+            <block wx:if="{{matchCountZB>3}}">
+              <view class='main_2_product_title_result_more' data-keyword="{{companyName}}" bindtap='lookMoreZB'>查看更多>></view>
+            </block>
+          </view>
+          <view>
+            <block wx:for="{{ZBGGData}}">
+              <view class='main_2_content_body_row'>
+                  <text class='main_2_content_body_row_title'>{{item.title}}</text>
+                  <text class='main_2_content_body_row_time'>发布时间：{{item.date}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+    </view>
+    <view class='main_2'>
+        <text class='main_2_title'>医疗器械服务</text>
+        <view class='main_2_type'>
+          <block wx:for="{{qxfw}}">
+            <view class="sc {{item.cls}} {{item.selected==true?'active':''}}" bindtap='FWChange' data-sign='{{item.sign}}'>{{item.title}}</view>
+          </block>
+        </view>
+        <!--信息服务资格信息列表-->
+        <block wx:if="{{currentFW=='xx'}}">
+          <block wx:if="{{xinxiFW==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>证书编号</text>
+                <text class='content_value'>{{xinxiFW.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证机关</text>
+                <text class='content_value'>{{xinxiFW.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证日期</text>
+                <text class='content_value'>{{xinxiFW.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>有效期限</text>
+                <text class='content_value'>{{xinxiFW.expiry_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{xinxiFW.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{xinxiFW.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>服务性质</text>
+                <text class='content_value'>{{xinxiFW.service_nature}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{xinxiFW.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>单位地址</text>
+                <text class='content_value'>{{xinxiFW.company_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>邮编</text>
+                <text class='content_value'>{{xinxiFW.zipcode}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>IP地址</text>
+                <text class='content_value'>{{xinxiFW.ip_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>域名</text>
+                <text class='content_value'>{{xinxiFW.domain_name}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <!--交易服务资格信息列表-->
+        <block wx:else>
+          <block wx:if="{{jiaoyiFW==''}}">
+            <template is="noInfoTemplate" />
+          </block>
+          <block wx:else>
+            <view class='main_2_content'>
+              <view class='main_2_content_row'>
+                <text class='content_title'>证书编号</text>
+                <text class='content_value'>{{jiaoyiFW.register_code}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证机关</text>
+                <text class='content_value'>{{jiaoyiFW.approval_dept}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>发证日期</text>
+                <text class='content_value'>{{jiaoyiFW.approval_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>有效期限</text>
+                <text class='content_value'>{{jiaoyiFW.expiry_date}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业名称</text>
+                <text class='content_value'>{{jiaoyiFW.company_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>法定代表人</text>
+                <text class='content_value'>{{jiaoyiFW.legal_person}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>服务范围</text>
+                <text class='content_value'>{{jiaoyiFW.service_scope}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>企业负责人</text>
+                <text class='content_value'>{{jiaoyiFW.business_owner}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>单位地址</text>
+                <text class='content_value'>{{jiaoyiFW.company_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>邮编</text>
+                <text class='content_value'>{{jiaoyiFW.zipcode}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>网站名称</text>
+                <text class='content_value'>{{jiaoyiFW.web_name}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>IP地址</text>
+                <text class='content_value'>{{jiaoyiFW.ip_address}}</text>
+              </view>
+              <view class='main_2_content_row'>
+                <text class='content_title'>域名</text>
+                <text class='content_value'>{{jiaoyiFW.domain_name}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+    </view>
+    <view class='main_2'>
+        <text class='main_2_title'>新闻报道</text>
+        <template is="noInfoTemplate" />
+    </view>
+    <view class='bottom'>
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+</view>

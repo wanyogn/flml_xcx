@@ -1,0 +1,104 @@
+<import src="../header/header.wxml" />
+<view class='content-container'>
+  <view class="header">
+    <template is="headerTemplate" data="{{...item,index:thisIndex,searchValue:keyword}}" />
+  </view>
+  <view class='main'>
+    <view class='main_1'>
+      <view class='main_title'>
+        <text>{{searchData.hospital_name}}</text>
+      </view>
+      <view class='main_content'>  
+        <view class='main_content_body'>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>省份</text>
+            <text class='content_value'>{{searchData.province}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>所属区县市</text>
+            <text class='content_value'>{{searchData.area}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>详细地址</text>
+            <text class='content_value'>{{searchData.hospital_address}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>邮编</text>
+            <text class='content_value'>{{searchData.zipcode}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>区号</text>
+            <text class='content_value'>{{searchData.area_code}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>电话</text>
+            <text class='content_value'>{{searchData.hospital_phone}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>传真</text>
+            <text class='content_value'>{{searchData.facsimile}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>网址</text>
+            <text class='content_value'>{{searchData.website}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>卫生机构登记号</text>
+            <text class='content_value'></text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>卫生机构类别</text>
+            <text class='content_value'></text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>医院等级</text>
+            <text class='content_value'>{{searchData.hospital_grade}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>分类性质</text>
+            <text class='content_value'>{{searchData.type_nature}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>建院时间</text>
+            <text class='content_value'>{{searchData.build_hospital_date}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>法人或院长</text>
+            <text class='content_value'>{{searchData.legal_person}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>职工人数</text>
+            <text class='content_value'>{{searchData.worker_number}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>床位数</text>
+            <text class='content_value'>{{searchData.sickbed_count}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>年门诊数</text>
+            <text class='content_value'>{{searchData.outpatient_number_year}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>年住院人数</text>
+            <text class='content_value'>{{searchData.hospital_number_year}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>特色专科</text>
+            <text class='content_value'>{{searchData.cha_special_sub}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>主要设备</text>
+            <text class='content_value'>{{searchData.main_equipment}}</text>
+          </view>
+          <view class='main_1_content_body_row'>
+            <text class='content_title'>医院简介</text>
+            <text class='content_value'>{{searchData.brief_intro}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='bottom'>
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+</view>

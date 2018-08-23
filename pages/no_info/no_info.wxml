@@ -1,0 +1,6 @@
+<template name="noInfoTemplate">
+  <view class='none_info'>
+    <image src='../image/no_info.png'></image>
+    <text>暂无相关信息，查看公司的其他信息</text>
+  </view>
+</template>

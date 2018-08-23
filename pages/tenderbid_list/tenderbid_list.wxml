@@ -1,0 +1,14 @@
+<view class='main'>  
+  <view class='main_2'>
+    <view class='main_2_product'>
+      <view>
+        <block wx:for="{{ZBGGData}}">
+          <view class='main_2_content_body_row'>
+              <text class='main_2_content_body_row_title'>{{item.web_title}}</text>
+              <text class='main_2_content_body_row_time'>发布时间：{{item.release_date}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<view><image src='../image/logo.png' class='logo_img'></image></view> 
+<view class='container_view'> 
+  <view class='classify'>
+    <view class='classify_main'>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{items}}">
+          <radio value="{{item.name}}" checked="{{item.checked}}" color='#f39800'/>{{item.value}}
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="search_view">  
+    <input class="search_input" placeholder="请输入关键字" bindinput='inputChange' value="{{searchValue}}"/>  
+    <view class='search_button' bindtap='search'>
+      <icon type="search" color='#fff' class='search_icon'/>
+    </view>  
+  </view>
+  <view class='search_mulu'bindtap='keyInput'>
+    新版《医疗器械分类目录》查询
+  </view>
+</view>
+

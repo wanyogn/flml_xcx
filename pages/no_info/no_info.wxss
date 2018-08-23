@@ -1,0 +1,17 @@
+/*没有相关信息*/
+.none_info{
+  width: 70%;
+  margin: 30rpx auto;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row
+}
+.none_info image{
+  width: 60rpx;
+  height: 50rpx;
+}
+.none_info text{
+  margin-left: 20rpx;
+  line-height: 50rpx;
+  color: #bfc0c0;
+}

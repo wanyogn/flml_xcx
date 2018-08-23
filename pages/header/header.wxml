@@ -1,0 +1,16 @@
+<template name="headerTemplate">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        <input type='text' class='type_input' disabled='disabled' value='{{array[index]}}'/>
+        <view class='type_button'>
+          <image src='../image/jian.png' class='type_img'></image>
+        </view>
+      </view>
+    </picker>
+    <view class='header_2'>
+      <input type='text' class='search_input' placeholder='髋关节' bindinput='inputChange' value='{{searchValue}}'/>
+      <view class='search_button' bindtap='search'>
+        <icon type="search" color='#fff' class='search_icon' size='15'/>
+      </view>
+    </view>
+</template>
