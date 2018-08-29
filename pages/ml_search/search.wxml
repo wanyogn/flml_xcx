@@ -33,4 +33,8 @@
     <button bindtap='clickDir' id='IVD'>IVD</button>
     <view style='clear:both'></view>
   </view>
+
+  <view class='search_mulu'bindtap='treatSearch'>
+    《医疗机构诊疗科目名录》
+  </view>
 </view>

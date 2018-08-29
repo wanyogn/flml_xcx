@@ -14,7 +14,9 @@
     "pages/ml_first/first",
     "pages/ml_search/search",
     "pages/ml_searchResult/searchResult",
-    "pages/ml_second/second"
+    "pages/ml_second/second",
+    "pages/treat_first/treat_first",
+    "pages/treat_second/treat_second"
   ],
   "window": {
     "backgroundTextStyle": "light",

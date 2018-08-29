@@ -1,0 +1,46 @@
+<view class='content_container'>
+  <view class='content_title'>
+    医疗机构诊疗科目名录
+  </view>
+
+  <view class='dir_num'>
+    <button bindtap='clickDir' id='1'>01</button>
+    <button bindtap='clickDir' id='2'>02</button>
+    <button bindtap='clickDir' id='3'>03</button>
+    <button bindtap='clickDir' id='4'>04</button>
+    <button class='last' bindtap='clickDir' id='5'>05</button>
+    <button bindtap='clickDir' id='6'>06</button>
+    <button bindtap='clickDir' id='7'>07</button>
+    <button bindtap='clickDir' id='8'>08</button>
+    <button bindtap='clickDir' id='9'>09</button>
+    <button class='last' bindtap='clickDir' id='10'>10</button>
+    <button bindtap='clickDir' id='11'>11</button>
+    <button bindtap='clickDir' id='12'>12</button>
+    <button bindtap='clickDir' id='13'>13</button>
+    <button bindtap='clickDir' id='14'>14</button>
+    <button class='last' bindtap='clickDir' id='15'>15</button>
+    <button bindtap='clickDir' id='16'>16</button>
+    <button bindtap='clickDir' id='17'>17</button>
+    <button bindtap='clickDir' id='18'>18</button>
+    <button bindtap='clickDir' id='19'>19</button>
+    <button class='last' bindtap='clickDir' id='20'>20</button>
+    <button bindtap='clickDir' id='21'>21</button>
+    <button bindtap='clickDir' id='22'>22</button>
+    <button bindtap='clickDir' id='23'>23</button>
+    <button bindtap='clickDir' id='24'>24</button>
+    <button class='last' bindtap='clickDir' id='25'>25</button>
+    <button bindtap='clickDir' id='26'>26</button>
+    <button bindtap='clickDir' id='27'>27</button>
+    <button bindtap='clickDir' id='28'>28</button>
+    <button bindtap='clickDir' id='29'>30</button>
+    <button class='last' bindtap='clickDir' id='30'>31</button>
+    <button bindtap='clickDir' id='31'>32</button>
+    <button bindtap='clickDir' id='32'>50</button>
+    <button bindtap='clickDir' id='33'>51</button>
+    <button bindtap='clickDir' id='34'>52</button>
+    <button class='last' bindtap='clickDir' id='35'>61</button>
+    <button bindtap='clickDir' id='36'>79</button>
+    <button bindtap='clickDir' id='37'>99</button>
+    <view style='clear:both'></view>
+  </view>
+</view>

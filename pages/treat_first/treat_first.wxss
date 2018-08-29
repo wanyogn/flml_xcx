@@ -1,0 +1,29 @@
+
+.content_container{
+  padding: 50rpx;
+}
+.content_title{
+  text-align: center;
+  color: #00c4c6;
+  font-size: 24px;
+}
+
+.dir_num{
+  width: 100%;
+  height: auto;
+  margin-top: 30rpx;
+}
+.dir_num button{
+  width: 18%;
+  float: left;
+  margin-right: 2.5%;
+  margin-top: 30rpx;
+  color:  #00c4c6;
+}
+.dir_num .last{
+  margin-right: 0;
+}
+
+.val_tip{
+  
+}

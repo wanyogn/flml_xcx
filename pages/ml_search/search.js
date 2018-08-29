@@ -57,6 +57,11 @@ Page({
       keyword: e.detail.value.trim()
     })
   },
+  treatSearch: function (e) {
+    wx.navigateTo({
+      url: '../treat_first/treat_first'
+    });
+  },
   searchKey:function(e){
     if (this.data.keyword == ""){
       wx.showModal({
