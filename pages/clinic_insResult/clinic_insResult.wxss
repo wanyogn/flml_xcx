@@ -1,0 +1,101 @@
+/*.content_container{
+}*/
+.header{
+  padding: 20rpx 20rpx;
+  height: 150rpx;
+  background-color: #00c4c6;
+  position: relative
+}
+/*搜索框 start*/
+.input{
+  height: 72rpx;
+}
+.input input{
+  border: 1px solid #fff;
+  background-color: #fff;
+  color: #00c4c6;
+  height: 68rpx;
+  width: 80%;
+  float: left;
+  font-size: 16px;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  padding:0 20rpx;
+}
+.input button{
+  width: 19%;
+  height: 100%;
+  margin-left: -40rpx;
+  float: left;
+  border: 1px solid #286090;
+  background-color: #286090;
+  color: #fff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  z-index: 100
+}
+.search_res{
+  font-size: 28rpx;
+  position: absolute;
+  bottom: 20rpx;
+  left: 20rpx;
+}
+.res_key,.res_num{
+  color: #f39800;
+  font-size: 28rpx;
+}
+
+/*搜索结果页*/
+.result_content{
+  padding:0 20rpx 20rpx 20rpx;
+}
+.result_content_main{
+  margin-top: 20rpx;
+  padding:20rpx 20rpx;
+  border: 1rpx solid #f3efef;
+  background: #f3efef;
+  border-radius: 10rpx;
+}
+.hospital_name{
+  font-size: 30rpx;
+  color: #f39800;
+  float: left
+}
+.hospital_info{
+ float: right
+}
+.hospital_info text{
+  font-size: 24rpx;
+  color: #808080;
+  display: block
+}
+.title{
+  font-size: 24rpx;
+  color: #808080;
+}
+.item{
+  margin-top: 10rpx;
+}
+.left{
+  float: left
+}
+.right{
+  float: right
+}
+.more{
+  text-align: center;
+  color:red;
+  text-decoration: underline
+}
+.name{
+  width: 60%;
+}
+.job,.study{
+  width: 20%;
+}
+.lookmore{
+  font-size: 26rpx;
+  text-align: center;
+  color: #808080;
+  padding: 10rpx 0;
+}

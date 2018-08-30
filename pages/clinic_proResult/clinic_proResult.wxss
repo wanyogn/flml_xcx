@@ -1,0 +1,2 @@
+/* pages/clinic_proResult/clinic_proResult.wxss */
+@import "../clinic_insResult/clinic_insResult.wxss";

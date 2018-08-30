@@ -1,0 +1,59 @@
+/* pages/jump_page/jump_page.wxss */
+.content_main{
+  padding: 20rpx;
+}
+.title{
+  display: flex;
+  flex-direction: column
+}
+.title_header{
+  font-size: 44rpx;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  padding-top: 60rpx;
+  padding-bottom: 20rpx;
+}
+.title_tip{
+  font-size: 26rpx;
+  color: #d0d0d0;
+  text-align: center
+}
+.choice_main{
+  width: 100%;
+  margin-top: 300rpx;
+}
+.choice_one{
+  width: 48%;
+  height: 300rpx;
+  background: #00c4c6;
+  float: left;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+.choice_one image,.choice_two image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.choose_title{
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  color: #fff;
+  text-align: center
+}
+.choose_tip{
+  font-size: 28rpx;
+  color: #d0d0d0;
+  text-align: center;
+  margin-top: 20rpx;
+}
+.choice_two{
+  width: 48%;
+  height: 300rpx;
+  background: #9f7cb6;
+  float: right;
+   border-radius: 20rpx;
+   display: flex;
+  flex-direction: column
+}

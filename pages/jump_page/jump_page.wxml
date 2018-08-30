@@ -1,0 +1,19 @@
+<!--由医械查跳转至分类目录的中间页-->
+<view class='content_main'>
+  <view class='title'>
+    <view class='title_header'>医疗器械注册助手</view>
+    <view class='title_tip'>智械旗下专业查询工具</view>
+  </view>
+  <view class='choice_main' bindtap='bindFLML'>
+    <view class='choice_one'>
+      <image src='../image/flml.png'></image>
+      <text class='choose_title'>医疗器械分类界定</text>
+      <text class='choose_tip'>查询分类目录</text>
+    </view>
+    <view class='choice_two' bindtap='bindLCSY'>
+      <image src='../image/lcsy.png'></image>
+      <text class='choose_title'>医疗器械临床试验</text>
+      <text class='choose_tip'>查询机构和专业</text>
+    </view>
+  </view>
+</view>

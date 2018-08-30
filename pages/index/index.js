@@ -75,7 +75,7 @@ Page({
   },
   keyInput: function (e) {
     wx.navigateTo({
-      url: '../ml_search/search'
+      url: '../jump_page/jump_page'
     });
   },
   onShareAppMessage: function (res) {

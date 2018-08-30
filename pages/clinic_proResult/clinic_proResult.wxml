@@ -1,0 +1,54 @@
+<view class='content_container'>
+  <view class='header'>
+    <view class='input'>
+      <input type='text' placeholder='请输入关键词，多个词以空格隔开' placeholder-class="place-holder" bindinput='keyInput' value='{{keyword}}'/>
+      <button bindtap='searchKey'><icon type="search" color='#fff'/></button>
+    </view>
+    <view class='search_res'>共找到<text class='res_num'>{{matchCount}}</text>家专业医疗机构</view>
+  </view>
+  <scroll-view scroll-y style="height: {{showHeight}}px">
+    <view class='result_content'>
+      <block wx:if='{{matchCount > 0}}'>
+        <block wx:for="{{searchDatas}}" wx:for-item="item">
+          <view class='result_content_main'>
+            <view class='result_header'>
+              <view class='hospital_name'>{{item.hospital_name}}</view>
+              <view class='hospital_info'>
+                <text>{{item.province}}</text>
+                <text>{{item.hospital_grade}}</text>
+              </view>
+              <view style='clear:both'></view>
+            </view>
+            <view class='result_main'>
+              <view class='item'>
+                <view class='title name left'>专业名称</view>
+                <view class='title job left'>职称</view>
+                <view class='title study left'>主要研究者</view>
+                <view style='clear:both'></view>
+              </view>
+              <block wx:for="{{item.secondList}}" wx:for-item="idx">
+                <view class='item'>
+                  <view class='title name left'>{{idx.profession_name}}</view>
+                  <view class='title job left'>{{idx.job_title}}</view>
+                  <view class='title study left'>{{idx.main_researcher}}</view>
+                  <view style='clear:both'></view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+        <block wx-if='{{matchCount > hasTotal}}'>
+          <view class='lookmore' bindtap='lookMore'>加载更多。。</view>
+        </block>
+        <block wx:else>
+          <view class='lookmore'>已加载全部。。</view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class='lookmore'>没有搜到记录</view>
+      </block>
+      
+    </view>
+  </scroll-view>
+  
+</view>
