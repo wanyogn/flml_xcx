@@ -11,13 +11,16 @@ Page({
     numPerpage: 10,
     hasTotal: 0,
     showHeight:0,
+    province:[],
+    proSel:[],
+    proSelFlag:true
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let keyword = options.keyword;
-    //let keyword = '微生物';
+    //let keyword = '口腔';
     this.setData({
       keyword: keyword,
     })
@@ -29,12 +32,12 @@ Page({
         })
       }
     })
-    this.contentActive(keyword, 0);
-    
+    this.contentActive(keyword, 0,"");
+    this.selectAllPro();
   },
-  contentActive: function (keyword, num) {
+  contentActive: function (keyword, num, province) {
     let that = this;
-    let data = { keyword: keyword, num: num, classify: 'profess' }
+    let data = { keyword: keyword, num: num, classify: 'profess', province: province }
     util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', data, function (res) {
       if (num == 0) {
         if (that.data.numPerpage > res.data) {
@@ -68,6 +71,20 @@ Page({
     this.contentActive(this.data.keyword, this.data.searchPageNum);
     
   },
+  selectAllPro: function () {
+    let that = this;
+    util.sendAjax('https://www.yixiecha.cn/wx_card/selectAreas.php', {}, function (res) {
+      that.setData({
+        province: res
+      })
+    })
+  },
+  bindchange: function (e) {
+    let pro = e.detail.value;
+    this.setData({
+      proSel: pro
+    })
+  },
   keyInput: function (e) {
     this.setData({
       keyword: e.detail.value
@@ -77,5 +94,37 @@ Page({
     wx.navigateTo({
       url: '../clinic_proResult/clinic_proResult?keyword=' + this.data.keyword
     })
-  }
+  },
+  areaSel: function () {
+    let flag = this.data.proSelFlag;
+    this.setData({
+      proSelFlag: !flag,
+    })
+  },
+  save_pro:function(){
+    let proSel = this.data.proSel;
+    this.setData({
+      proSelFlag: !this.data.proSelFlag,
+    })
+    this.contentActive(this.data.keyword, 0, proSel);
+  },
+  forDetail: function (e) {
+    let pid = e.currentTarget.dataset.id;
+    let name = e.currentTarget.dataset.name;
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinicalInstitutionHiddenInfoByMap.php', { pid: pid, name: name }, function (res) {
+      let str = '';
+      for (let i = 0; i < res.data.length; i++) {
+        str += (res.data[i].main_researcher + "      " + res.data[i].job_title + "\n")
+      }
+      wx.showModal({
+        title: name,
+        content: str,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      })
+    })
+  },
 })

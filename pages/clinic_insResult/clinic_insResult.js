@@ -11,7 +11,14 @@ Page({
     searchPageNum:0,
     numPerpage:10,
     hasTotal:0,
-    classify: ''
+    classify: '',
+    province:[],
+    proSel:[],
+    zlSel:[],
+    TreatDirectory:[],
+    proSelFlag:true,
+    zlSelFlag:true,
+    flag:true,
   },
 
   /**
@@ -19,9 +26,9 @@ Page({
    */
   onLoad: function (options) {
     let keyword = options.keyword;
-    //let keyword = '上海';
+    //let keyword = '医院';
     let classify = options.classify;
-    //let keyword = '微生物';
+    //let classify = 'instit';
     this.setData({
       keyword: keyword,
       classify: classify
@@ -35,14 +42,26 @@ Page({
       }
     })
     if (classify == "instit") {
-      this.contentActive(keyword, 0);
+      this.contentActive(keyword, 0,"","");
     } else if (classify == "province") {
       this.contentProvince(keyword, 0);
     }
+    this.selectAllPro();
+    this.selecAllZL();
   },
-  contentActive:function(keyword,num){
+  contentActive: function (keyword, num, province, profession_name){
     let that=this;
-    let data = { keyword: keyword, num: num, classify:'instit'}
+    let data = {};
+    data.keyword = keyword;
+    data.num = num;
+    data.classify = 'instit';
+    if(province != ""){
+      data.province = province;
+    }
+    if (profession_name!=""){
+      data.profession_name = profession_name;
+    }
+    //let data = { keyword: keyword, num: num, classify: 'instit', province: '', profession_name:'^儿科|^内科'}
     util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php',data,function(res){
       if(num == 0){
         if(that.data.numPerpage > res.data){
@@ -101,7 +120,7 @@ Page({
       hasTotal: parseInt(this.data.numPerpage * (this.data.searchPageNum+2)),
     });
     if (this.data.classify == "instit") {
-      this.contentActive(this.data.keyword, this.data.searchPageNum);
+      this.contentActive(this.data.keyword, this.data.searchPageNum,"","");
     } else if (this.data.classify == "province") {
       this.contentProvince(this.data.keyword, this.data.searchPageNum);
     }
@@ -145,6 +164,111 @@ Page({
       }
     }
   },
+  /*查看伦理委员会信息 */
+  bindClick:function(e){
+    let name = e.currentTarget.dataset.name;
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectInstitutionEthicalInfoByName.php',{name:name},function(res){
+      let str = '';
+      if (res.data.length > 0){
+        let info = res.data[0].hospital_ethical_info;
+        for (let i = 0; i < info.split("#").length; i++) {
+          str += info.split("#")[i] + "\r\n"
+        }
+        
+      }else{
+        str = "没有相关内容";
+      }
+      wx.showModal({
+        title: name,
+        content: str,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      })
+    })
+  },
+  areaSel:function(){
+    let flag = this.data.proSelFlag;
+    this.setData({
+      proSelFlag:!flag,
+      flag:false,
+    })
+  },
+  zlSel:function(){
+    let flag = this.data.zlSelFlag;
+    this.setData({
+      zlSelFlag: !flag,
+      flag: false
+    })
+  },
+  selectAllPro:function(){
+    let that = this;
+    util.sendAjax('https://www.yixiecha.cn/wx_card/selectAreas.php', {}, function (res) {
+      that.setData({
+        province:res
+      })
+    })
+  },
+  selecAllZL:function(){
+    let that = this;
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', {id:0}, function (res) {
+      console.log(res);
+      that.setData({
+        TreatDirectory: res.list
+      })
+    })
+  },
+  /*复选框 */
+  bindchange:function(e){
+    let pro = e.detail.value;
+    this.setData({
+      proSel:pro
+    })
+  },
+  bindchangeZL:function(e){
+    let zl = e.detail.value;
+    this.setData({
+      zlSel: zl
+    })
+  },
+  save_pro:function(e){
+    let proSel=this.data.proSel;
+    let zlSel = this.data.zlSel;
+    let flag = e.currentTarget.dataset.flag;
+    if(flag == "qy"){
+      this.setData({
+        proSelFlag: !this.data.proSelFlag,
+        flag: true
+      })
+    }else if(flag == "zl"){
+      this.setData({
+        zlSelFlag: !this.data.zlSelFlag,
+        flag: true
+      })
+    }
+    this.contentActive(this.data.keyword, 0, proSel, zlSel);
+  },
+  forDetail:function(e){
+    let pid = e.currentTarget.dataset.id;
+    let name = e.currentTarget.dataset.name;
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinicalInstitutionHiddenInfoByMap.php',{pid:pid,name:name},function(res){
+      let str = '';
+      for(let i = 0;i < res.data.length;i++){
+        str += (res.data[i].main_researcher + "      " + res.data[i].job_title+"\n")
+      }
+      wx.showModal({
+        title: name,
+        content: str,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      })
+    })
+  },
   keyInput:function(e){
     this.setData({
       keyword:e.detail.value
@@ -152,7 +276,7 @@ Page({
   },
   searchKey:function(){
     wx.navigateTo({
-      url: '../clinic_insResult/clinic_insResult?keyword=' + this.data.keyword
+      url: '../clinic_insResult/clinic_insResult?classify=instit&keyword=' + this.data.keyword
     })
   }
 })

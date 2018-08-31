@@ -1,0 +1,93 @@
+/* pages/modal/modal.wxss */
+/*添加按钮*/
+.add-button {
+    position: fixed;
+    top: 90%;
+    left: 600rpx;
+    height: 100rpx;
+    width: 100rpx;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    /*background-color: black;*/
+    /*opacity: 0.1;*/
+}
+/*蒙层*/
+.cover {
+    height: 3000rpx;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #000000;
+    opacity: 0.5;
+
+
+}
+.modal {
+    height: 750rpx;
+    width: 750rpx;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    z-index: 100;
+    /*background-color: black;*/
+    /*padding: 20rpx;*/
+}
+.modal .create-box {
+    margin: 20rpx;
+    padding: 80rpx;
+    /*background-color: #29DDB9;*/
+    background-color: #FFFFFF;
+    /*border: 4rpx solid #29DDB9;*/
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.create-box .close-button {
+    height:60rpx;
+    width:60rpx;
+    margin-top:-60rpx;
+    margin-right:-60rpx;
+    align-self: flex-end;
+}
+
+.modal .create-box .text {
+    width:100%;
+    height:200rpx;
+    display:block;
+    position:relative;
+    margin-top:80rpx;
+    background-color:#FDFDFD;
+    padding: 20rpx;
+}
+
+.modal .create-box .button-box {
+    width: 100%;
+    margin-top: 80rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-box .submit-button {
+    background-color: #29DDB9;
+    width: 100rpx;
+    padding: 20rpx;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 10rpx;
+}
+
+.button-box .delete-button {
+    background-color: #9B9B9B;
+    width: 100rpx;
+    padding: 20rpx;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 10rpx;
+}

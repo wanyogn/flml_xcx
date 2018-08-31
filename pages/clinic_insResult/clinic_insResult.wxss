@@ -1,5 +1,9 @@
 /*.content_container{
 }*/
+page{
+  width: 100%;
+  height: 100%;
+}
 .header{
   padding: 20rpx 20rpx;
   height: 150rpx;
@@ -36,9 +40,7 @@
 }
 .search_res{
   font-size: 28rpx;
-  position: absolute;
-  bottom: 20rpx;
-  left: 20rpx;
+  
 }
 .res_key,.res_num{
   color: #f39800;
@@ -48,6 +50,7 @@
 /*搜索结果页*/
 .result_content{
   padding:0 20rpx 20rpx 20rpx;
+  background: #e6e6e6;
 }
 .result_content_main{
   margin-top: 20rpx;
@@ -98,4 +101,99 @@
   text-align: center;
   color: #808080;
   padding: 10rpx 0;
+}
+.btn{
+  font-size: 20rpx;
+  padding: 0;
+  width: 200rpx;
+  float: left
+}
+
+.row{
+  position: absolute;
+  bottom: 20rpx;
+  left: 20rpx;
+  display: flex;
+  flex-direction: row
+}
+.screen{
+  color: #808080;
+  font-size: 24rpx;
+  margin-left: 30rpx;
+  margin-top: 5rpx;
+}
+.main_container{
+  width: 100%;
+  height: 100%;
+}
+.mask {
+ width: 100%; 
+ height: 100%; 
+ position: fixed; 
+ top: 0; 
+ left: 0; 
+ z-index: 1000; 
+ background: #000; 
+ opacity: 0.3; 
+}
+
+/*蒙层*/
+.cover {
+    height: 3000rpx;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #000000;
+    opacity: 0.5;
+    z-index: 1000
+}
+.modal {
+    width: 100%;
+    height: 200rpx;
+    position: fixed;
+    top: 80rpx;
+    left: 0;
+    z-index: 2000;
+}
+.modal .create-box {
+    margin: 20rpx;
+    padding: 30rpx;
+    background-color: #FFFFFF;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+}
+.choice_title{
+  color: #808080;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.title{
+  font-size: 24rpx;
+}
+.area{
+  width: 100%;
+  margin-top: 30rpx;
+}
+.area_name{
+  width: 25%;
+  font-size: 28rpx;
+  float: left
+}
+.zl_name{
+  width: 33%;
+  font-size: 28rpx;
+  float: left;
+  margin-top: 10px;
+}
+.area_content{
+  width: 75%;
+  float: left;
+}
+.area_val{
+  font-size: 28rpx;
+  width: 25%;
+  float: left;
 }
