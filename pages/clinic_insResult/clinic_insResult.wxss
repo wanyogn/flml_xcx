@@ -7,7 +7,7 @@ page{
 .header{
   padding: 20rpx 20rpx;
   height: 150rpx;
-  background-color: #00c4c6;
+  background-color: #9f7cb6;
   position: relative
 }
 /*搜索框 start*/
@@ -17,7 +17,7 @@ page{
 .input input{
   border: 1px solid #fff;
   background-color: #fff;
-  color: #00c4c6;
+  color: #9f7cb6;
   height: 68rpx;
   width: 80%;
   float: left;
@@ -70,7 +70,8 @@ page{
 .hospital_info text{
   font-size: 24rpx;
   color: #808080;
-  display: block
+  display: block;
+  text-align: center
 }
 .title{
   font-size: 24rpx;
@@ -87,7 +88,7 @@ page{
 }
 .more{
   text-align: center;
-  color:red;
+  color:#9f7cb6;
   text-decoration: underline
 }
 .name{
@@ -95,14 +96,17 @@ page{
 }
 .job,.study{
   width: 20%;
+  text-align: center;
 }
 .lookmore{
   font-size: 26rpx;
   text-align: center;
   color: #808080;
   padding: 10rpx 0;
+  
 }
 .btn{
+  display: block;
   font-size: 20rpx;
   padding: 0;
   width: 200rpx;
@@ -110,17 +114,17 @@ page{
 }
 
 .row{
-  position: absolute;
-  bottom: 20rpx;
-  left: 20rpx;
-  display: flex;
-  flex-direction: row
+  margin-top: 40rpx;
+  width: 100%;
 }
 .screen{
-  color: #808080;
+  color: #fff;
   font-size: 24rpx;
   margin-left: 30rpx;
   margin-top: 5rpx;
+}
+.ml60{
+  margin-left: 60rpx;
 }
 .main_container{
   width: 100%;
@@ -146,13 +150,13 @@ page{
     top: 0;
     background-color: #000000;
     opacity: 0.5;
-    z-index: 1000
+    z-index: 1000;
 }
 .modal {
     width: 100%;
     height: 200rpx;
     position: fixed;
-    top: 80rpx;
+    top: 0rpx;
     left: 0;
     z-index: 2000;
 }
@@ -163,6 +167,7 @@ page{
     border-radius: 10rpx;
     display: flex;
     flex-direction: column;
+    overflow: auto
 }
 .choice_title{
   color: #808080;
@@ -196,4 +201,26 @@ page{
   font-size: 28rpx;
   width: 25%;
   float: left;
+}
+.width60{
+  width: 60%;
+}
+.width40{
+  width: 40%;
+}
+.width80{
+  width: 80%;
+}
+.width20{
+  width: 20%;
+}
+.colordar{
+  color: #9f7cb6
+}
+.txt_center{
+  text-align: center
+}
+.more_person{
+  color: #f39800;
+  text-decoration: underline;
 }

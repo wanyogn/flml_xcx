@@ -6,36 +6,28 @@ Page({
    * 页面的初始数据
    */
   data: {
+    resultDatas:[],
   },
-  onReady: function () {
+ /* onReady: function () {
     handlerLogin.ifAuthen();
-  },
+  },*/
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+    let that = this;
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: 0 }, function (res) {      
+      for(let i = 0;i < res.list.length;i++){
+        let obj = res.list[i];
+        util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess'}, function (data) {
+          obj.bazy=data.count;
+          that.setData({
+            resultDatas: res.list
+          })
+        })
+      }
+      
+    })
   },
 
   /**
@@ -44,12 +36,53 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /*点击首页的目录事件*/
-  clickDir: function (e) {
-    let id = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../treat_second/treat_second?id=' + id
-    })
-  }
+/*点击展开二级目录 */
+  openSecond:function(e){
+    let id = e.target.id;
+    let resultDatas = this.data.resultDatas;
+    let that = this;
+    for(let i = 0;i<resultDatas.length;i++){
+      if(id == resultDatas[i].id){
+        if(resultDatas[i].secondList == undefined){//是否首次点击展开
+          util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php", { id: id }, function (data) {
+            for(let j = 0;j < data.list.length;j++){
+              let obj = data.list[j];
+              util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess' }, function (res) {
+                obj.bazy = res.count;
+                resultDatas[i].secondList = data.list;
+                resultDatas[i].isshow = true;
+                that.setData({
+                  resultDatas: resultDatas
+                })
+              })
+            }
+            
+          })
+        }else{
+          resultDatas[i].isshow = true;
+          that.setData({
+            resultDatas: resultDatas
+          })
+        }
+      }else{
+        resultDatas[i].isshow = false;
+        that.setData({
+          resultDatas: resultDatas
+        })
+      }
+    }
+  },
+  closeSecond: function (e) {
+    let id = e.target.id;
+    let resultDatas = this.data.resultDatas;
+    for (let i = 0; i < resultDatas.length; i++) {
+      if (resultDatas[i].id == id) {
+        resultDatas[i].isshow = false;
+        this.setData({
+          resultDatas: resultDatas
+        })
+      }
+    }
+  },
 
 })

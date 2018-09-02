@@ -4,8 +4,8 @@
     <view class='title_header'>医疗器械注册助手</view>
     <view class='title_tip'>智械旗下专业查询工具</view>
   </view>
-  <view class='choice_main' bindtap='bindFLML'>
-    <view class='choice_one'>
+  <view class='choice_main'>
+    <view class='choice_one' bindtap='bindFLML'>
       <image src='../image/flml.png'></image>
       <text class='choose_title'>医疗器械分类界定</text>
       <text class='choose_tip'>查询分类目录</text>

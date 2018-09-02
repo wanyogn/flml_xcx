@@ -16,7 +16,7 @@
     </view>  
   </view>
   <view class='search_mulu'bindtap='keyInput'>
-    新版《医疗器械分类目录》查询
+    = 医疗器械注册助手 =
   </view>
 </view>
 

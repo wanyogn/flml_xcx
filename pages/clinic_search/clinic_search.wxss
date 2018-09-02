@@ -1,4 +1,39 @@
 @import "../ml_search/search.wxss";
+.content_container{
+  padding: 50rpx;
+}
+.content_title{
+  text-align: center;
+  color: #9f7cb6;
+  font-size: 24px;
+}
+
+.input input{
+  border: 1px solid #9f7cb6;
+  height: 68rpx;
+  width: 80%;
+  float: left;
+  font-size: 28rpx;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  padding:0 20rpx; 
+  color: #9f7cb6
+}
+.input .place-holder{
+  font-size: 28rpx;
+}
+.input button{
+  width: 19%;
+  height: 100%;
+  margin-left: -40rpx;
+  float: left;
+  border: 1px solid #9f7cb6;
+  background-color: #9f7cb6;
+  color: #fff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/*搜索框 end*/
 .input{
   margin-top: 10rpx;
 }
@@ -13,16 +48,16 @@
 .search_mechanism,.search_major{
   width: 30%;
   height: 100%;
-  border: 1rpx solid #00c4c6;
+  border: 1rpx solid #9f7cb6;
   font-size: 30rpx;
   line-height: 60rpx;
   text-align: center;
-  color:#00c4c6; 
+  color:#9f7cb6; 
   letter-spacing: 5rpx;
   font-weight: bold
 }
 .active{
-  background: #00c4c6;
+  background: #9f7cb6;
   color: #fff;
 }
 
@@ -37,12 +72,12 @@
   margin-top: 30rpx;
 }
 .area_name{
-  width: 25%;
+  width: 20%;
   font-size: 28rpx;
   float: left
 }
 .area_content{
-  width: 75%;
+  width: 80%;
   float: left;
 }
 .area_val{
@@ -51,5 +86,7 @@
   float: left;
 }
 .area_val text{
-  margin-left: 0.5em
+  margin-left: 0.5em;
+  color: #9f7cb6;
+  font-size: 24rpx;
 }

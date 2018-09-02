@@ -8,6 +8,7 @@ Page({
     searchDatas:[],
     matchCount:0,
     keyword:'',
+    keyPro:'',//传过来的省份
     searchPageNum:0,
     numPerpage:10,
     hasTotal:0,
@@ -30,7 +31,7 @@ Page({
     let classify = options.classify;
     //let classify = 'instit';
     this.setData({
-      keyword: keyword,
+     // keyword: keyword,
       classify: classify
     })
     let that = this;
@@ -43,26 +44,36 @@ Page({
     })
     if (classify == "instit") {
       this.contentActive(keyword, 0,"","");
+      this.setData({
+         keyword: keyword,
+      })
     } else if (classify == "province") {
-      this.contentProvince(keyword, 0);
+      this.contentActive("", 0, keyword, "");
+      this.setData({
+        keyPro: keyword,
+        proSel:keyword
+      })
     }
     this.selectAllPro();
     this.selecAllZL();
   },
   contentActive: function (keyword, num, province, profession_name){
     let that=this;
-    let data = {};
-    data.keyword = keyword;
-    data.num = num;
-    data.classify = 'instit';
-    if(province != ""){
-      data.province = province;
-    }
-    if (profession_name!=""){
-      data.profession_name = profession_name;
-    }
-    //let data = { keyword: keyword, num: num, classify: 'instit', province: '', profession_name:'^儿科|^内科'}
+    let data = { keyword: keyword, num: num, classify: 'instit', province: province, profession_name:profession_name}
     util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php',data,function(res){
+      for(let i = 0;i<res.data.length;i++){
+        res.data[i].approval_date_original = res.data[i].approval_date_original.substring(0,10);
+        if (res.data[i].hospital_grade.length > 5){
+          res.data[i].hospital_grade =util.getText(res.data[i].hospital_grade,5);
+        }
+        if (res.data[i].province == "内蒙古自治区"){
+          res.data[i].province = "内蒙古";
+        } else if (res.data[i].province == "广西壮族自治区"){
+          res.data[i].province = "广西";
+        } else if (res.data[i].province == "宁夏回族自治区"){
+          res.data[i].province = "宁夏";
+        }
+      }
       if(num == 0){
         if(that.data.numPerpage > res.data){
           that.setData({
@@ -90,6 +101,9 @@ Page({
     let that = this;
     let data = { keyword: keyword, num: num, classify: 'province' }
     util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', data, function (res) {
+      for (let i = 0; i < res.data.length; i++) {
+        res.data[i].approval_date_original = res.data[i].approval_date_original.substring(0, 10);
+      }
       if (num == 0) {
         if (that.data.numPerpage > res.data) {
           that.setData({
@@ -119,10 +133,22 @@ Page({
       searchPageNum: this.data.searchPageNum + 1,
       hasTotal: parseInt(this.data.numPerpage * (this.data.searchPageNum+2)),
     });
+    let proSel = this.data.proSel;
+    let zlSel = this.data.zlSel;
+    if (typeof proSel == 'string') {//没有进行区域选择，但是还是要带上首页进来时所选的省份
+      this.setData({
+        proSel: this.data.keyPro
+      })
+    } else {
+    }
+    console.log(proSel);
+    console.log(zlSel);
     if (this.data.classify == "instit") {
-      this.contentActive(this.data.keyword, this.data.searchPageNum,"","");
+      this.contentActive(this.data.keyword, this.data.searchPageNum, proSel, zlSel);
     } else if (this.data.classify == "province") {
-      this.contentProvince(this.data.keyword, this.data.searchPageNum);
+     // this.contentActive(this.data.keyword, this.data.searchPageNum,);
+      
+      this.contentActive(this.data.keyword, this.data.searchPageNum, proSel, zlSel );
     }
   },
   /*查看专业 */
@@ -133,7 +159,28 @@ Page({
     for (let i = 0; i < searchData.length; i++) {
       if (searchData[i].id == id) {
         if (searchData[i].profess == undefined){//首次点击需要请求服务器
-          util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinicalById.php', { id: id }, function (res) {
+          util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinicalById.php', { id: id }, function (res) {          
+            for(let j = 0;j<res.data.length;j++){
+              let obj = res.data[j];
+              obj.isClick = false;//判断当前行是否可以点击
+              if(obj.profession_name.length > 15){//专业长度
+                obj.profession_name_ch = util.getText(obj.profession_name,15);
+                obj.isClick = true;
+              }else{
+                obj.profession_name_ch = obj.profession_name;
+              }
+              if (obj.job_title.length > 5){//职称长度
+                obj.job_title = util.getText(obj.job_title, 5);
+                obj.isClick = true;
+              }
+              if (obj.main_researcher.length > 5){//主要研究者
+                obj.main_researcher = util.getText(obj.main_researcher, 5);
+                obj.isClick = true;
+              }
+              if(obj.num > 1){
+                obj.isClick = true;
+              }
+            }
             searchData[i].profess = res.data;
             searchData[i].show = true;
             that.setData({
@@ -206,6 +253,16 @@ Page({
   selectAllPro:function(){
     let that = this;
     util.sendAjax('https://www.yixiecha.cn/wx_card/selectAreas.php', {}, function (res) {
+      console.log(res);
+      for(let i = 0;i<res.length;i++){
+        for(let j = 0;j<res[i].content.length;j++){
+          let obj = res[i].content[j];
+          obj.check = false;
+          if(obj.name == that.data.keyPro){
+            obj.check = true;
+          }
+        }
+      }
       that.setData({
         province:res
       })
@@ -214,7 +271,6 @@ Page({
   selecAllZL:function(){
     let that = this;
     util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', {id:0}, function (res) {
-      console.log(res);
       that.setData({
         TreatDirectory: res.list
       })
@@ -234,8 +290,17 @@ Page({
     })
   },
   save_pro:function(e){
+
     let proSel=this.data.proSel;
     let zlSel = this.data.zlSel;
+    if (typeof proSel == 'string') {//没有进行区域选择，但是还是要带上首页进来时所选的省份
+      //proSel.push(this.data.keyPro);
+      this.setData({
+        proSel: this.data.keyPro,
+        searchPageNum:0
+      })
+    }else{
+    }
     let flag = e.currentTarget.dataset.flag;
     if(flag == "qy"){
       this.setData({
@@ -275,8 +340,33 @@ Page({
     })
   },
   searchKey:function(){
-    wx.navigateTo({
+    /*wx.navigateTo({
       url: '../clinic_insResult/clinic_insResult?classify=instit&keyword=' + this.data.keyword
-    })
-  }
+    })*/
+    let proSel = this.data.proSel;
+    let zlSel = this.data.zlSel;
+    if (typeof proSel == 'string') {//没有进行区域选择，但是还是要带上首页进来时所选的省份
+      this.setData({
+        proSel: this.data.keyPro
+      })
+    } else {
+    }
+    this.contentActive(this.data.keyword, 0, proSel, zlSel);
+  },
+  onShareAppMessage: function () {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '医械查',
+      path: '/pages/clinic_insResult/clinic_insResult',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
 })

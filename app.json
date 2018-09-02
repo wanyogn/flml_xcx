@@ -17,10 +17,9 @@
     "pages/ml_second/second",
     "pages/treat_first/treat_first",
     "pages/treat_second/treat_second",
-    "pages/clinic_search/clinic_search",
-    "pages/test/test",
     "pages/clinic_proResult/clinic_proResult",
     "pages/clinic_insResult/clinic_insResult",
+    "pages/clinic_search/clinic_search",
     "pages/jump_page/jump_page"
     
   ],

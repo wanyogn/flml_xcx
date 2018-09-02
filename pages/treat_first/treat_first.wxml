@@ -4,7 +4,7 @@
   </view>
 
   <view class='dir_num'>
-    <button bindtap='clickDir' id='1'>01</button>
+    <!--<button bindtap='clickDir' id='1'>01</button>
     <button bindtap='clickDir' id='2'>02</button>
     <button bindtap='clickDir' id='3'>03</button>
     <button bindtap='clickDir' id='4'>04</button>
@@ -41,6 +41,50 @@
     <button class='last' bindtap='clickDir' id='35'>61</button>
     <button bindtap='clickDir' id='36'>79</button>
     <button bindtap='clickDir' id='37'>99</button>
-    <view style='clear:both'></view>
+    <view style='clear:both'></view>-->
+    <block wx:for="{{resultDatas}}" wx:for-item="item">
+      <view class='item'>
+        <view class='item_left'>
+          <view class='item_title'>
+            <view class='item_title_num'>{{item.code}}</view>
+            <view class='item_title_content'>{{item.name}}</view>
+          </view>
+          <block wx:if='{{item.num > 0}}'>
+            <view class='item_childNum'>包含{{item.num}}二级目录
+              <block wx:if='{{item.isshow == true}}'>
+                <view class='item_more' id='{{item.id}}' bindtap='closeSecond'>-</view>
+              </block>
+              <block wx:else>
+                <view class='item_more' id='{{item.id}}' bindtap='openSecond'>+</view>
+              </block>
+            </view>
+          </block>
+          <block wx:else>
+            <view class='item_childNum'>无二级目录</view>
+          </block>
+        </view>
+        <view class='item_right'>
+          <view class='item_bajg'>
+            备案机构：{{item.bazy}}
+          </view>
+          <view class='item_bajg'>
+            备案专业：{{item.bazy}}
+          </view>
+        </view>
+        <view style='clear:both'></view>
+      </view>
+      
+      <block wx:if='{{item.isshow == true}}'>
+        <block wx:for="{{item.secondList}}" wx:for-item="idx">
+          <view class='Childitem'>
+            <view class='itemchild_num'>{{item.code}}.{{idx.code}}</view>
+            <view class='itemchild_name'>{{idx.name}}</view>
+            <view class='itemchild_bazy'>备案专业:{{idx.bazy}}</view>
+            <view class='itemchild_bazy mr10'>备案机构:{{idx.bazy}}</view>
+            <view style='clear:both'></view>
+          </view>
+        </block>
+      </block>
+    </block>
   </view>
 </view>

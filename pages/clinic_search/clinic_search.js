@@ -72,7 +72,6 @@ Page({
   },
   searchByProvince:function(e){
     let province = e.currentTarget.dataset.province;
-    console.log(province);
     wx.navigateTo({
       url: '../clinic_insResult/clinic_insResult?classify=province&keyword=' + province
     })
@@ -103,5 +102,21 @@ Page({
         })
       }
     }
-  }
+  },
+  onShareAppMessage: function () {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '医械查',
+      path: '/pages/clinic_search/clinic_search',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
 })

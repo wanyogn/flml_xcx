@@ -1,19 +1,19 @@
 <view class='content_container'>
   <view class='content_title'>
-    临床试验备案机构查询
+    临床试验机构查询
   </view>
   <view class='classtype'>
     <view class="search_mechanism {{classify=='instit'?'active':''}}" data-classify='instit' bindtap='bindChoose'>搜机构</view>
     <view class="search_major {{classify=='profess'?'active':''}}" data-classify='profess' bindtap='bindChoose' >搜专业</view>
   </view>
   <view class='input'>
-    <input type='text' placeholder='请输入关键词，多个词以空格隔开' placeholder-class="place-holder" bindinput='keyInput'/>
+    <input type='text' placeholder='请输入关键词...' placeholder-class="place-holder" bindinput='keyInput'/>
     <button bindtap='searchKey'><icon type="search" color='#fff'/></button>
   </view>
   <view class='areaChoose'>
-    <view class='title'>按区域选择</view>
+    <view class='title'></view>
     <view class='area'>
-      <view class='area_name'>华北地区：</view>
+      <view class='area_name'>华北：</view>
       <view class='area_content'>
         <block wx:for="{{huabei}}" wx:for-item="item">
           <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
@@ -22,55 +22,55 @@
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>东北地区：</view>
+      <view class='area_name'>东北：</view>
       <view class='area_content'>
         <block wx:for="{{dongbei}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>华东地区：</view>
+      <view class='area_name'>华东：</view>
       <view class='area_content'>
         <block wx:for="{{huadong}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>华中地区：</view>
+      <view class='area_name'>华中：</view>
       <view class='area_content'>
         <block wx:for="{{huazhong}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>华南地区：</view>
+      <view class='area_name'>华南：</view>
       <view class='area_content'>
         <block wx:for="{{huanan}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>西南地区：</view>
+      <view class='area_name'>西南：</view>
       <view class='area_content'>
         <block wx:for="{{xinan}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
     </view>
     <view class='area'>
-      <view class='area_name'>西北地区：</view>
+      <view class='area_name'>西北：</view>
       <view class='area_content'>
         <block wx:for="{{xibei}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>

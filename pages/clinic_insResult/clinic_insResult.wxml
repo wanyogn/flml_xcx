@@ -4,13 +4,18 @@
   <view class='content_main'>
     <view class='header'>
       <view class='input'>
-        <input type='text' placeholder='请输入关键词' placeholder-class="place-holder" bindinput='keyInput' value='{{keyword}}'/>
+        <input type='text' placeholder='请输入机构关键词' placeholder-class="place-holder" bindinput='keyInput' value='{{keyword}}'/>
         <button bindtap='searchKey'><icon type="search" color='#fff'/></button>
       </view>
       <view class='row'>
-        <view class='search_res'>共找到<text class='res_num'>{{matchCount}}</text>家备案医疗机构</view>
-        <view class='screen' bindtap='areaSel'>按所在地区筛选</view>
-        <view class='screen' bindtap='zlSel'>按诊疗目录筛选</view>
+        <view class='left'>
+          <view class='search_res'>共找到 <text class='res_num'>{{matchCount}}</text> 家临床试验机构</view>
+        </view>
+        <view class='right' style='display:flex;flex-direction:row'>
+          <view class='screen ml60' bindtap='areaSel'>按地区筛选</view>
+          <view class='screen' bindtap='zlSel'>按专业筛选</view>
+        </view>
+        <view style='clear:both'></view>
       </view>
     </view>
     <scroll-view scroll-y style="height: {{showHeight}}px;">
@@ -19,9 +24,9 @@
           <block wx:for="{{searchDatas}}" wx:for-item="item">
             <view class='result_content_main'>
               <view class='result_header'>
-                <view class='hospital_name'>{{item.hospital_name}}</view>
-                <button class='btn' data-name='{{item.hospital_name}}' bindtap='bindClick'>伦理委员会信息</button>
-                <view class='hospital_info'>
+                <view class='hospital_name width80'>{{item.hospital_name}}</view>
+               <!-- <button class='btn' data-name='{{item.hospital_name}}' bindtap='bindClick'>伦理委员会信息</button>-->
+                <view class='hospital_info width20'>
                   <text>{{item.province}}</text>
                   <text>{{item.hospital_grade}}</text>
                 </view>
@@ -29,24 +34,28 @@
               </view>
               <view class='result_main'>
                 <view class='item'>
-                  <view class='title left'>备案号：{{item.register_code}}</view>
-                  <view class='title right'>备案日期：{{item.approval_date_original}}</view>
+                  <view class='title left width60'>备案号：{{item.register_code}}</view>
+                  <view class='title right width40'>联系人：{{item.contact_person}}</view>
                   <view style='clear:both'></view>
                 </view>
                 <view class='item'>
-                  <view class='title left'>联系人：{{item.contact_person}}</view>
-                  <view class='title right'>联系电话：{{item.contact_phone}}</view>
+                  <view class='title left width60'>备案日期：{{item.approval_date_original}}</view>
+                  <view class='title right width40'>电话：{{item.contact_phone}}</view>
                   <view style='clear:both'></view>
                 </view>
                 <view class='item'>
                   <view class='title'>地址：{{item.hospital_address}}</view>
                 </view>
                 <view class='item'>
+                  <button class='btn' data-name='{{item.hospital_name}}' bindtap='bindClick'>伦理委员会信息</button>
+                  <view style='clear:both'></view>
+                </view>
+                <view class='item'>
                   <block wx:if='{{item.show==true}}'>
-                    <view class='title more' id='{{item.id}}' bindtap='disProfess'>↑收起所有的备案专业和主要研究者信息</view>
+                    <view class='title more' id='{{item.id}}' bindtap='disProfess'>专业和主要研究者</view>
                   </block>
                   <block wx:else>
-                    <view class='title more' id='{{item.id}}' bindtap='lookProfess'>查看所有的备案专业和主要研究者信息</view>
+                    <view class='title more' id='{{item.id}}' bindtap='lookProfess'>专业和主要研究者</view>
                   </block>
                 </view>
                 <block wx:if="{{item.profess==null}}">
@@ -54,30 +63,35 @@
                 <block wx:else>
                   <block wx:if='{{item.show==true}}'>
                     <view class='item'>
-                      <view class='title name left'>专业名称</view>
-                      <view class='title job left'>职称</view>
-                      <view class='title study left'>主要研究者</view>
+                      <view class='title name left colordar txt_center'>专业名称</view>
+                      <view class='title job left colordar'>主要研究者</view>
+                      <view class='title study left colordar'>职称</view>
                       <view style='clear:both'></view>
                     </view>
                     <block wx:for="{{item.profess}}" wx:for-item="idx">
-                      <block wx:if='{{idx.num > 1}}'>
+                      <block wx:if='{{idx.isClick == true}}'><!--每行专业点击判断-->
                         <view class='item' data-name='{{idx.profession_name}}' data-id='{{idx.pid}}' bindtap='forDetail'>
-                          <view class='title name left'>{{idx.profession_name}}</view>
-                          <view class='title job left'  >{{idx.num}}+</view>
-
+                          <view class='title name left'>{{idx.profession_name_ch}}</view>
+                          <block wx:if='{{idx.num > 1}}'><!--多个专业显示折叠-->
+                            <view class='title job left more_person'  >{{idx.num}}人</view>
+                          </block>
+                          <block wx:else>
+                            <view class='title job left'>{{idx.main_researcher}}</view>
+                            <view class='title study left'>{{idx.job_title}}</view>
+                          </block>
                           <view style='clear:both'></view>
                         </view>
                       </block>
                       <block wx:else>
                         <view class='item'>
                           <view class='title name left'>{{idx.profession_name}}</view>
-                          <view class='title job left'>{{idx.job_title}}</view>
-                          <view class='title study left'>{{idx.main_researcher}}</view>
+                          <view class='title job left'>{{idx.main_researcher}}</view>
+                          <view class='title study left'>{{idx.job_title}}</view>
                           <view style='clear:both'></view>
                         </view>
                       </block>
                     </block>
-                    <view class='lookmore' id='{{item.id}}' bindtap='disProfess'>↑收起</view>
+                    <view class='lookmore' id='{{item.id}}' bindtap='disProfess'>- 收起 -</view>
                   </block>
                   <block wx:else>
                   </block>
@@ -86,10 +100,10 @@
             </view>
           </block>
           <block wx-if='{{matchCount > hasTotal}}'>
-            <view class='lookmore' bindtap='lookMore'>加载更多。。</view>
+            <view class='lookmore' bindtap='lookMore'>加载更多...</view>
           </block>
           <block wx:else>
-            <view class='lookmore'>已加载全部。。</view>
+            <view class='lookmore'>已加载全部</view>
           </block>
         </block>
         <block wx:else>
@@ -109,7 +123,7 @@
               <block wx:for="{{item.content}}" wx:for-item="idx">
                 <!--<view class='area_val' data-province='' bindtap='searchByProvince'><checkbox></checkbox>{{idx.name}}</view>-->
                 <label class="area_val">
-                  <checkbox value="{{idx.name}}" />{{idx.name}}
+                  <checkbox value="{{idx.name}}" checked='{{idx.check==true?true:false}}' />{{idx.name}}
                 </label>
               </block>
             </view>
