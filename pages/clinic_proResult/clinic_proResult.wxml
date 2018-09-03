@@ -15,7 +15,7 @@
       <view style='clear:both'></view>
     </view>
   </view>
-  <scroll-view scroll-y style="height: {{showHeight}}px">
+  <scroll-view scroll-y style="height: {{screenHeight-160}}px" bindscrolltolower='lookMore'>
     <view class='result_content'>
       <block wx:if='{{matchCount > 0}}'>
         <block wx:for="{{searchDatas}}" wx:for-item="item">
@@ -73,10 +73,10 @@
       
     </view>
   </scroll-view>
-  <view class='modal' hidden='{{proSelFlag}}'>
-    <view class='create-box'>
+  <view class='modal' hidden='{{proSelFlag}}' style="height: {{screenHeight}}px;">
+    <view class='create-box' style="height: {{screenHeight-100}}px;">
       <view class='choice_title'>按区域选择</view>
-      <checkbox-group bindchange="bindchange">
+      <checkbox-group bindchange="bindchange" style="height: 80%;overflow:auto;margin-top:10rpx;">
         <block wx:for="{{province}}" wx:for-item="item">
           <view class='area'>
             <view class='area_name'>{{item.title.name}}：</view>

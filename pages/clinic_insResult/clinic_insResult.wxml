@@ -18,7 +18,7 @@
         <view style='clear:both'></view>
       </view>
     </view>
-    <scroll-view scroll-y style="height: {{showHeight}}px;">
+    <scroll-view scroll-y style="height: {{screenHeight-160}}px;" bindscrolltolower='lookMore'>
       <view class='result_content'>
         <block wx:if="{{matchCount > 0}}">
           <block wx:for="{{searchDatas}}" wx:for-item="item">
@@ -112,16 +112,16 @@
       </view>
     </scroll-view>
   </view>
-  <view class='modal' hidden='{{proSelFlag}}'>
-    <view class='create-box'>
-      <view class='choice_title'>按区域选择</view>
-      <checkbox-group bindchange="bindchange">
+  <view class='modal' hidden='{{proSelFlag}}' style="height: {{screenHeight}}px;">
+    <view class='create-box' style="height: {{screenHeight-100}}px;">
+      <view class='choice_title' style="">按区域选择</view>
+      <checkbox-group bindchange="bindchange" style="height: 80%;overflow:auto;margin-top:10rpx;">
         <block wx:for="{{province}}" wx:for-item="item">
           <view class='area'>
             <view class='area_name'>{{item.title.name}}：</view>
             <view class='area_content'>
               <block wx:for="{{item.content}}" wx:for-item="idx">
-                <!--<view class='area_val' data-province='' bindtap='searchByProvince'><checkbox></checkbox>{{idx.name}}</view>-->
+                
                 <label class="area_val">
                   <checkbox value="{{idx.name}}" checked='{{idx.check==true?true:false}}' />{{idx.name}}
                 </label>
@@ -134,12 +134,11 @@
       <button class='save_pro'  data-flag='qy' bindtap='save_pro'>确定</button>
     </view>
   </view>
-
-  <view class='modal' hidden='{{zlSelFlag}}'>
-    <view class='create-box'>
+  <view class='modal' hidden='{{zlSelFlag}}' style="height: {{screenHeight}}px;">
+    <view class='create-box' style="height: {{screenHeight-100}}px;">
       <view class='choice_title'>诊疗科目选择</view>
-        <view class='area'>
-          <checkbox-group bindchange="bindchangeZL">
+        <view class='area' style="height: 80%;overflow:auto;margin-top:10rpx;">
+          <checkbox-group bindchange="bindchangeZL" >
             <block wx:for="{{TreatDirectory}}" wx:for-item="item">
               <label class="zl_name">
                 <checkbox value="{{item.name}}" />{{item.name}}

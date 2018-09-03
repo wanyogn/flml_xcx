@@ -154,24 +154,22 @@ page{
 }
 .modal {
     width: 100%;
-    height: 200rpx;
+    /*height: 200rpx;*/
     position: fixed;
     top: 0rpx;
     left: 0;
     z-index: 2000;
 }
 .modal .create-box {
-    margin: 20rpx;
+    margin: 30rpx;
     padding: 30rpx;
     background-color: #FFFFFF;
     border-radius: 10rpx;
-    display: flex;
-    flex-direction: column;
-    overflow: auto
+    box-sizing: border-box; 
 }
 .choice_title{
   color: #808080;
-  font-size: 30rpx;
+  font-size: 38rpx;
   text-align: center;
 }
 
@@ -183,7 +181,7 @@ page{
   margin-top: 30rpx;
 }
 .area_name{
-  width: 25%;
+  width: 15%;
   font-size: 28rpx;
   float: left
 }
@@ -194,13 +192,16 @@ page{
   margin-top: 10px;
 }
 .area_content{
-  width: 75%;
+  width: 85%;
   float: left;
 }
 .area_val{
   font-size: 28rpx;
   width: 25%;
   float: left;
+}
+.save_pro{
+  margin-top: 10rpx;
 }
 .width60{
   width: 60%;

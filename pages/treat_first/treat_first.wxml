@@ -65,10 +65,10 @@
         </view>
         <view class='item_right'>
           <view class='item_bajg'>
-            备案机构：{{item.bazy}}
+            备案机构：{{item.institution_num}}
           </view>
           <view class='item_bajg'>
-            备案专业：{{item.bazy}}
+            备案专业：{{item.profession_num}}
           </view>
         </view>
         <view style='clear:both'></view>
@@ -79,8 +79,8 @@
           <view class='Childitem'>
             <view class='itemchild_num'>{{item.code}}.{{idx.code}}</view>
             <view class='itemchild_name'>{{idx.name}}</view>
-            <view class='itemchild_bazy'>备案专业:{{idx.bazy}}</view>
-            <view class='itemchild_bazy mr10'>备案机构:{{idx.bazy}}</view>
+            <view class='itemchild_bazy'>备案专业:{{idx.institution_num}}</view>
+            <view class='itemchild_bazy mr10'>备案机构:{{idx.profession_num}}</view>
             <view style='clear:both'></view>
           </view>
         </block>

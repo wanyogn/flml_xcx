@@ -10,7 +10,7 @@ Page({
     searchPageNum: 0,
     numPerpage: 10,
     hasTotal: 0,
-    showHeight:0,
+    screenHeight:0,
     province:[],
     proSel:[],
     proSelFlag:true
@@ -28,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
-          showHeight:res.screenHeight-160
+          screenHeight:res.screenHeight
         })
       }
     })
@@ -185,14 +185,14 @@ Page({
       url: '../clinic_insResult/clinic_insResult?classify=instit&keyword=' + name
     })
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
     return {
       title: '医械查',
-      path: '/pages/clinic_proResult/clinic_proResult',
+      path: '/pages/clinic_proResult/clinic_proResult?keyword='+this.data.keyword,
       success: function (res) {
         // 转发成功
       },

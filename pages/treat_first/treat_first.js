@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: 0 }, function (res) {      
+    /*util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: 0 }, function (res) {      
       for(let i = 0;i < res.list.length;i++){
         let obj = res.list[i];
         util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess'}, function (data) {
@@ -27,15 +27,25 @@ Page({
         })
       }
       
+    })*/
+    wx.showLoading({
+      title: '加载中...',
     })
+    util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: 0 }, function (res) {
+      that.setData({
+        resultDatas: res.list
+      })
+      wx.hideLoading()
+    })
+   
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+ /* onShareAppMessage: function () {
 
-  },
+  },*/
 /*点击展开二级目录 */
   openSecond:function(e){
     let id = e.target.id;
@@ -44,7 +54,7 @@ Page({
     for(let i = 0;i<resultDatas.length;i++){
       if(id == resultDatas[i].id){
         if(resultDatas[i].secondList == undefined){//是否首次点击展开
-          util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php", { id: id }, function (data) {
+          /*util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php", { id: id }, function (data) {
             for(let j = 0;j < data.list.length;j++){
               let obj = data.list[j];
               util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess' }, function (res) {
@@ -56,7 +66,17 @@ Page({
                 })
               })
             }
-            
+          })*/
+          wx.showLoading({
+            title: '加载中...',
+          })
+          util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: id }, function (res) {
+            resultDatas[i].secondList = res.list;
+            resultDatas[i].isshow = true;
+            that.setData({
+              resultDatas: resultDatas
+            })
+            wx.hideLoading();
           })
         }else{
           resultDatas[i].isshow = true;

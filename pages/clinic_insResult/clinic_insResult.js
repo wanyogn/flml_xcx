@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    screenHeight:0,
     searchDatas:[],
     matchCount:0,
     keyword:'',
@@ -38,7 +39,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          showHeight: res.screenHeight - 160
+          screenHeight: res.screenHeight
         })
       }
     })
@@ -141,13 +142,9 @@ Page({
       })
     } else {
     }
-    console.log(proSel);
-    console.log(zlSel);
     if (this.data.classify == "instit") {
       this.contentActive(this.data.keyword, this.data.searchPageNum, proSel, zlSel);
-    } else if (this.data.classify == "province") {
-     // this.contentActive(this.data.keyword, this.data.searchPageNum,);
-      
+    } else if (this.data.classify == "province") {      
       this.contentActive(this.data.keyword, this.data.searchPageNum, proSel, zlSel );
     }
   },
@@ -296,8 +293,7 @@ Page({
     if (typeof proSel == 'string') {//没有进行区域选择，但是还是要带上首页进来时所选的省份
       //proSel.push(this.data.keyPro);
       this.setData({
-        proSel: this.data.keyPro,
-        searchPageNum:0
+        proSel: this.data.keyPro
       })
     }else{
     }
@@ -305,12 +301,14 @@ Page({
     if(flag == "qy"){
       this.setData({
         proSelFlag: !this.data.proSelFlag,
-        flag: true
+        flag: true,
+        searchPageNum: 0//查看当前页清零
       })
     }else if(flag == "zl"){
       this.setData({
         zlSelFlag: !this.data.zlSelFlag,
-        flag: true
+        flag: true,
+        searchPageNum: 0//查看当前页清零
       })
     }
     this.contentActive(this.data.keyword, 0, proSel, zlSel);
@@ -353,14 +351,21 @@ Page({
     }
     this.contentActive(this.data.keyword, 0, proSel, zlSel);
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    let classify = this.data.classify;
+    let path = '';
+    if(classify == 'instit'){
+      path = '/pages/clinic_insResult/clinic_insResult?classify=instit&keyword='+this.data.keyword
+    } else if (classify == 'province'){
+      path = '/pages/clinic_insResult/clinic_insResult?classify=province&keyword='+this.data.keyPro
+    }
     return {
       title: '医械查',
-      path: '/pages/clinic_insResult/clinic_insResult',
+      path: path,
       success: function (res) {
         // 转发成功
       },
