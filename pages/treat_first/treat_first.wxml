@@ -52,10 +52,10 @@
           <block wx:if='{{item.num > 0}}'>
             <view class='item_childNum'>包含{{item.num}}二级目录
               <block wx:if='{{item.isshow == true}}'>
-                <view class='item_more' id='{{item.id}}' bindtap='closeSecond'>-</view>
+                <view class='item_more' id='{{item.id}}' bindtap='closeSecond'>--</view>
               </block>
               <block wx:else>
-                <view class='item_more' id='{{item.id}}' bindtap='openSecond'>+</view>
+                <view class='item_more' id='{{item.id}}' bindtap='openSecond'>++</view>
               </block>
             </view>
           </block>
@@ -79,12 +79,15 @@
           <view class='Childitem'>
             <view class='itemchild_num'>{{item.code}}.{{idx.code}}</view>
             <view class='itemchild_name'>{{idx.name}}</view>
-            <view class='itemchild_bazy'>备案专业:{{idx.institution_num}}</view>
-            <view class='itemchild_bazy mr10'>备案机构:{{idx.profession_num}}</view>
+            <view class='item_right unline'>
+              <view class='itemchild_bazy'>专业:{{idx.profession_num}}</view>
+              <view class='itemchild_bazy mr10'>机构:{{idx.institution_num}} /</view>
+              <view style='clear:both'></view>
+            </view>
             <view style='clear:both'></view>
           </view>
         </block>
       </block>
     </block>
   </view>
-</view>
+</view><!--查看全部151家机构的378条记录    机构：151 / 专业：278   查看-->

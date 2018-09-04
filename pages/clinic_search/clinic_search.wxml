@@ -16,7 +16,7 @@
       <view class='area_name'>华北：</view>
       <view class='area_content'>
         <block wx:for="{{huabei}}" wx:for-item="item">
-          <view class='area_val' data-province='{{item.province}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
+          <view class='area_val' data-province='{{item.abbre}}' bindtap='searchByProvince'>{{item.abbre}}<text>{{item.num}}</text></view>
         </block>
       </view>
       <view style='clear:both'></view>
@@ -74,6 +74,9 @@
         </block>
       </view>
       <view style='clear:both'></view>
+    </view>
+    <view class='search_mulu' bindtap='treatSearch'>
+      《医疗机构诊疗科目名录》
     </view>
   </view>
 </view>

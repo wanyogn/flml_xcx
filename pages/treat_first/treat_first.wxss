@@ -1,7 +1,7 @@
 .content_title{
   padding-top: 40rpx;
   text-align: center;
-  color: #00c4c6;
+  color: #9f7cb6;
   font-size: 40rpx;
 }
 
@@ -10,11 +10,11 @@
   height: auto;
   margin-top: 30rpx;
   margin-bottom: 30rpx;
-  border-top: 1rpx solid #00c4c6;
+  border-top: 1px solid #d7d7d7;
 }
 .item{
   padding: 10rpx 40rpx;
-  border-bottom: 1rpx solid #00c4c6;
+  border-bottom: 1px solid #d7d7d7;
 }
 .item_left{
   float: left
@@ -28,11 +28,11 @@
 }
 .item_title_num{
   padding: 10rpx;
-  color: #808080;
+  color: #000;
   border: 1rpx solid #e0e0e0;
 }
 .item_title_content{
-  color: #808080;
+  color: #000;
   font-size: 36rpx;
   line-height: 74rpx;
   margin-left: 20rpx;
@@ -45,7 +45,6 @@
 .item_more{
   display: inline-block;
   font-size: 26rpx;
-  border: 1rpx solid red;
   border-radius: 50%;
   color: red;
   margin-left: 20rpx;
@@ -57,11 +56,11 @@
 }
 .Childitem{
   padding: 10rpx 40rpx;
-  border-bottom: 1rpx solid #00c4c6;
+  border-bottom: 1rpx solid #d7d7d7;
 }
 .itemchild_num,.itemchild_name{
   font-size: 26rpx;
-  color: #808080;
+  color: #9f7cb6;
   float: left;
   margin-left: 10rpx;
 }
@@ -73,4 +72,8 @@
 }
 .mr10{
   margin-right: 10rpx;
+}
+.unline{
+  text-decoration: underline;
+  text-decoration-color: #f39800;
 }

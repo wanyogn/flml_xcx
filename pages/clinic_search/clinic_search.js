@@ -119,4 +119,9 @@ Page({
       }
     }
   },
+  treatSearch: function (e) {
+    wx.navigateTo({
+      url: '../treat_first/treat_first'
+    });
+  },
 })
