@@ -4,7 +4,7 @@
       <input type='text' placeholder='请输入关键词，多个词以空格隔开' placeholder-class="place-holder" bindinput='keyInput' value='{{keyword}}'/>
       <button bindtap='searchKey'><icon type="search" color='#fff'/></button>
     </view>
-    <view class='search_res'>您搜索的关键词是'<text class='res_key'>{{keyword}}</text>'，共计<text class='res_num'>{{matchCount}}</text>条结果</view>
+    <view class='search_res'>您搜索的关键词是'<text class='res_key'>{{currentKey}}</text>'，共计<text class='res_num'>{{matchCount}}</text>条结果</view>
   </view>
   <scroll-view scroll-y style="height: {{showHeight}}px">
     <block wx:for='{{searchData}}' wx:for-item='item'>
@@ -13,7 +13,12 @@
           <view class='first_dir' id='{{index}}' bindtap='dirTap'>
             <view class='number'>{{item.dir_num}}{{item.first_number}}{{item.second_number}}</view>
             <view class='name'><rich-text nodes='{{item.name}}'></rich-text></view>
-            <view class='more'>+</view>
+            <block wx:if='{{item.isZK==true}}'>
+              <view class='more'>-</view>
+            </block>
+            <block wx:else>
+              <view class='more'>+</view>
+            </block>
           </view>
           <block wx:if="{{item.isZK}}">
             <view class='second_dir'>

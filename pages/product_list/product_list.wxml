@@ -15,7 +15,16 @@
           <text class='cdgs'>产地归属：{{item.src_loc}}</text>
           <text class='gllb'>管理类别：{{item.main_class}}</text>
           <text class='flml'>型号规格：{{item.product_mode}}</text>
-          
+          <view class='ml'>分类目录：
+            <block wx:if='{{item.mlNum > 0}}'>
+              <block wx:for="{{item.mlList}}" wx:for-item="idx">
+                {{idx.directory_number}}{{idx.first_product_number}}{{idx.second_product_number}},
+              </block>
+            </block>
+            <block wx:else>
+              没有该产品目录
+            </block>
+          </view>
          
          
         </view>

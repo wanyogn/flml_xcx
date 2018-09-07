@@ -16,18 +16,6 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    /*util.sendAjax('https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php', { id: 0 }, function (res) {      
-      for(let i = 0;i < res.list.length;i++){
-        let obj = res.list[i];
-        util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess'}, function (data) {
-          obj.bazy=data.count;
-          that.setData({
-            resultDatas: res.list
-          })
-        })
-      }
-      
-    })*/
     wx.showLoading({
       title: '加载中...',
     })
@@ -54,19 +42,6 @@ Page({
     for(let i = 0;i<resultDatas.length;i++){
       if(id == resultDatas[i].id){
         if(resultDatas[i].secondList == undefined){//是否首次点击展开
-          /*util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryTreatFirst.php", { id: id }, function (data) {
-            for(let j = 0;j < data.list.length;j++){
-              let obj = data.list[j];
-              util.sendAjax('https://www.yixiecha.cn/wx_catalog/selectClinical.php', { keyword: obj.name, num: 0, classify: 'profess' }, function (res) {
-                obj.bazy = res.count;
-                resultDatas[i].secondList = data.list;
-                resultDatas[i].isshow = true;
-                that.setData({
-                  resultDatas: resultDatas
-                })
-              })
-            }
-          })*/
           wx.showLoading({
             title: '加载中...',
           })
@@ -104,5 +79,11 @@ Page({
       }
     }
   },
+  seeDetail:function(e){
+    let name = e.currentTarget.dataset.name;
+    wx.navigateTo({
+      url: '../clinic_proResult/clinic_proResult?keyword='+name,
+    })
+  }
 
 })

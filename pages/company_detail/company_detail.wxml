@@ -126,9 +126,9 @@
             <view class='main_2_product_title_result'>
               相关信息<text class='product_num'>{{matchCount}}</text>个
             </view>
-            <block wx:if="{{matchCount>3}}">
+           <!-- <block wx:if="{{matchCount>3}}">-->
               <view class='main_2_product_title_result_more' data-keyword="{{companyName}}" bindtap='lookMore'>查看更多>></view>
-            </block>
+            <!--</block>-->
           </view>
           <view>
             <block wx:for="{{productData}}">

@@ -8,6 +8,7 @@ Page({
     clickCode: '',//当前点击的目录编号
     iszk: false,//是否展开
     showHeight:'',
+    currentKey:'',
     keyword:'',
     matchCount:0,
     searchData:[]
@@ -23,21 +24,27 @@ Page({
     var that = this;
     wx.getSystemInfo({//赋值给scroll-view，获取屏幕的高度
       success: function (res) {
-        console.log(res.screenHeight - 100);
         that.setData({
           showHeight:res.screenHeight-170
         })
       }
     });
-   
-    util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryByKey.php", {keyword:keyword}, function (data) {
-      for(let i = 0;i < data.datas.length;i++){
-        data.datas[i].name = util.changeColor(data.datas[i].name,keyword);
+    this.contentActive(keyword);
+    
+  },
+  contentActive: function (keyword){
+    let that=this;
+    wx.showLoading({
+      title: '数据加载中...',
+      mask:true
+    })
+    util.sendAjax("https://www.yixiecha.cn/wx_catalog/queryByKey.php", { keyword: keyword }, function (data) {
+      for (let i = 0; i < data.datas.length; i++) {
+        data.datas[i].name = util.changeColor(data.datas[i].name, keyword);
         data.datas[i].isZK = true;
-        for(let j = 0;j < data.datas[i].data.length;j++){
+        for (let j = 0; j < data.datas[i].data.length; j++) {
           data.datas[i].data[j].product_description = util.changeColor(data.datas[i].data[j].product_description, keyword);
           data.datas[i].data[j].expected_use = util.changeColor(data.datas[i].data[j].expected_use, keyword);
-         // data.datas[i].data[j].product_example = util.changeColor(data.datas[i].data[j].product_example, keyword);
           let product_example = data.datas[i].data[j].product_example;
           let arr = product_example.split("、");
           let _html = '';
@@ -45,21 +52,28 @@ Page({
           if (arr.length > 0) {
             if (arr[0] != "") {
               for (let j = 0; j < arr.length; j++) {
-                exampleArray.push(util.changeColor(arr[j],keyword));
+                exampleArray.push(util.changeColor(arr[j], keyword));
               }
               data.datas[i].data[j].product_example = exampleArray;
             }
           }
         }
       }
-      util.sendAjax("https://www.yixiecha.cn/wx_catalog/insert_search.php", { keyword: keyword, openid: wx.getStorageSync('openid'),tag:"YXC" }, function (data) {
-        
-      });
+      
       that.setData({
-        searchData:data.datas,
-        matchCount:data.matchCount,
-        keyword:keyword
+        searchData: data.datas,
+        matchCount: data.matchCount,
+        keyword: keyword,
+        currentKey: keyword
       })
+      that.insertRecord(keyword);
+      wx.hideLoading();
+    });
+    
+  },
+  insertRecord: function (keyword){
+    util.sendAjax("https://www.yixiecha.cn/wx_catalog/insert_search.php", { keyword: keyword, openid: wx.getStorageSync('openid'), tag: "YXC" }, function (data) {
+      
     });
   },
   /**
@@ -110,9 +124,7 @@ Page({
         }
       });
     } else {
-      wx.navigateTo({
-        url: '../ml_searchResult/searchResult?keyword=' + this.data.keyword
-      })
+      this.contentActive(this.data.keyword);
     }
   },
   bindExample:function(e){    

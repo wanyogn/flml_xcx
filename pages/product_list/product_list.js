@@ -23,7 +23,8 @@ Page({
   //填充页面
   fetchProduct:function(){
     let that = this;
-    util.getProByCom(that.data.keyword, that.data.currentPage , 10, function (data) {
+    //util.getProByCom(that.data.keyword, that.data.currentPage , 10, function (data) {
+    util.sendAjax('https://www.yixiecha.cn/wxsmallprogram/wx_company_detail.php', { dotype: 'product_ml', keyword:that.data.keyword,num:that.data.currentPage,size:10},function(data){
       for (var index in data.datas) {
         data.datas[index].main_class = util.getMain_class(data.datas[index].main_class);
         data.datas[index].src_loc = util.getSrc_loc(data.datas[index].src_loc);
@@ -39,6 +40,7 @@ Page({
         } else {
           data.datas[index].picture_addr = "../image/product.png";
         }
+        data.datas[index].mlNum = data.datas[index].mlList.length;
       }
       let searchList = [];
       searchList = that.data.productData.concat(data.datas);

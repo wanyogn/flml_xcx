@@ -142,7 +142,7 @@
 }
 .item{
   width: 100%;
-  height: 225rpx;
+  /*height: 225rpx;*/
   background-color: #fff;
   margin-top: 20rpx;
 

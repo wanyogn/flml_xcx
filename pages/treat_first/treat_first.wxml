@@ -50,14 +50,17 @@
             <view class='item_title_content'>{{item.name}}</view>
           </view>
           <block wx:if='{{item.num > 0}}'>
-            <view class='item_childNum'>包含{{item.num}}二级目录
-              <block wx:if='{{item.isshow == true}}'>
-                <view class='item_more' id='{{item.id}}' bindtap='closeSecond'>--</view>
-              </block>
-              <block wx:else>
-                <view class='item_more' id='{{item.id}}' bindtap='openSecond'>++</view>
-              </block>
-            </view>
+
+            <block wx:if='{{item.isshow == true}}'>
+              <view class='item_childNum' id='{{item.id}}' bindtap='closeSecond'>包含{{item.num}}二级目录
+                <view class='item_more'>↑↑</view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class='item_childNum' id='{{item.id}}' bindtap='openSecond'>包含{{item.num}}二级目录
+                <view class='item_more'>↓↓</view>
+              </view>
+            </block>
           </block>
           <block wx:else>
             <view class='item_childNum'>无二级目录</view>
@@ -79,10 +82,9 @@
           <view class='Childitem'>
             <view class='itemchild_num'>{{item.code}}.{{idx.code}}</view>
             <view class='itemchild_name'>{{idx.name}}</view>
-            <view class='item_right unline'>
-              <view class='itemchild_bazy'>专业:{{idx.profession_num}}</view>
+            <view class='item_right unline' data-name='{{idx.name}}' bindtap='seeDetail'>
               <view class='itemchild_bazy mr10'>机构:{{idx.institution_num}} /</view>
-              <view style='clear:both'></view>
+              <view class='itemchild_bazy'>专业:{{idx.profession_num}}</view>
             </view>
             <view style='clear:both'></view>
           </view>

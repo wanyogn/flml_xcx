@@ -47,7 +47,7 @@
   font-size: 26rpx;
   border-radius: 50%;
   color: red;
-  margin-left: 20rpx;
+  
 }
 .item_bajg{
   font-size: 28rpx;
@@ -65,15 +65,17 @@
   margin-left: 10rpx;
 }
 
-.itemchild_bazy,.itemchild_bazy{
+.itemchild_bazy{
   font-size: 26rpx;
   color: #808080;
-  float: right;
+  
 }
 .mr10{
-  margin-right: 10rpx;
+ 
 }
 .unline{
   text-decoration: underline;
   text-decoration-color: #f39800;
+  display: flex;
+  flex-direction: row
 }

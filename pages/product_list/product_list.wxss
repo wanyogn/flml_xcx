@@ -1,2 +1,8 @@
 /* pages/product_list/product_list.wxss */
 @import "../search_pro/search_pro.wxss";
+.ml{
+  display: flex;
+  flex-direction: row;
+  font-size: 26rpx;
+  color: #000;
+}

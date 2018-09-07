@@ -8,7 +8,12 @@
         <view class='first_dir' id='{{item.code}}' bindtap='showSecond'>
           <view class='number'>{{code}}{{item.code}}</view>
           <view class='name'>{{item.name}}</view>
-          <view class='more'>+</view>
+          <block wx:if='{{item.code==clickCode && iszk==true}}'>
+            <view class='more'>-</view>
+          </block>
+          <block wx:else>
+            <view class='more'>+</view>
+          </block>
         </view>
         <view class='second_dir'>
           <block wx:if="{{item.code==clickCode && iszk}}">
